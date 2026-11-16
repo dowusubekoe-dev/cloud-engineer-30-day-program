@@ -13,7 +13,7 @@ A 30-day, build-first program to revisit and prove senior-level cloud engineerin
 
 ## Week 1: one AWS reference architecture, built day by day
 
-A three-tier VPC (10.20.0.0/16) across two availability zones, built to production patterns on a $10/month budget guard: IAM least privilege, private app and data tiers, an ALB fronting an Auto Scaling group, and RDS Multi-AZ with tested failover and restore.
+A three-tier VPC (10.20.0.0/16) across two availability zones, built to production patterns on a $10/month budget guard: IAM least privilege, private app and data tiers, an ALB fronting an Auto Scaling group, and RDS Multi-AZ with failover and restore tests (Day 4, run pending).
 
 | Day | Build | Status |
 |---|---|---|
