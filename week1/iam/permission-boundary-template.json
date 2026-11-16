@@ -1,0 +1,44 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowWorkloadServices",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:*",
+        "s3:*",
+        "lambda:*",
+        "cloudwatch:*",
+        "logs:*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DenyPrivilegeEscalation",
+      "Effect": "Deny",
+      "Action": [
+        "iam:CreateUser",
+        "iam:CreateAccessKey",
+        "iam:CreatePolicy",
+        "iam:SetDefaultPolicyVersion",
+        "iam:AttachUserPolicy",
+        "iam:AttachRolePolicy",
+        "iam:PutUserPolicy",
+        "iam:PutRolePolicy",
+        "iam:PassRole"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DenyBoundaryAndOrgTampering",
+      "Effect": "Deny",
+      "Action": [
+        "iam:DeleteUserPermissionsBoundary",
+        "iam:DeleteRolePermissionsBoundary",
+        "organizations:LeaveOrganization",
+        "account:CloseAccount"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

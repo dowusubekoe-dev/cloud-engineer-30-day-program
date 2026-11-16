@@ -1,0 +1,47 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyCloudTrailTampering",
+      "Effect": "Deny",
+      "Action": [
+        "cloudtrail:StopLogging",
+        "cloudtrail:DeleteTrail",
+        "cloudtrail:UpdateTrail",
+        "cloudtrail:PutEventSelectors",
+        "cloudtrail:PutInsightSelectors"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DenyDisablingDetection",
+      "Effect": "Deny",
+      "Action": [
+        "config:StopConfigurationRecorder",
+        "config:DeleteConfigurationRecorder",
+        "config:DeleteDeliveryChannel",
+        "guardduty:DeleteDetector",
+        "securityhub:DisableSecurityHub"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DenyDisablingEncryption",
+      "Effect": "Deny",
+      "Action": [
+        "ec2:DisableEbsEncryptionByDefault",
+        "kms:DisableKey",
+        "kms:ScheduleKeyDeletion"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DenyLeavingOrganization",
+      "Effect": "Deny",
+      "Action": [
+        "organizations:LeaveOrganization"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

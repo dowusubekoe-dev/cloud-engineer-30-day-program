@@ -105,6 +105,31 @@ aws iam create-policy --policy-name app-data-access --policy-document file://wee
 4. **Prove it:** policies and notes in `week1/iam/`.
 5. **Drill:** "Design IAM for a 3-team company" — say it out loud, record it.
 
+### Screenshots (evidence)
+
+Captured 2026-11-16 from the AWS Console. Full checklist: [iam/screenshots.md](iam/screenshots.md).
+
+![Customer managed policies, app-data-access](iam/screenshots/01-policies-list.png)
+*Day 1: customer managed policies, with app-data-access first in the list.*
+
+![app-data-access policy JSON](iam/screenshots/02-app-policy-json.png)
+*The app-data-access policy document: S3 object access scoped to the app/ prefix.*
+
+![AWS Organizations accounts](iam/screenshots/04-organizations-accounts.png)
+*AWS Organizations: the 7 accounts of org o-h31ljtdj6n.*
+
+![monthly-guard budget](iam/screenshots/05-budget-monthly-guard.png)
+*AWS Budgets: monthly-guard, $10 budget, 80% actual-cost alert, not exceeded.*
+
+![CloudTrail trails](iam/screenshots/06-cloudtrail-trails.png)
+*CloudTrail in this account: no trails configured. An open item to trace before Day 5.*
+
+![IAM dashboard](iam/screenshots/07-iam-dashboard.png)
+*IAM dashboard: account resources and security recommendations.*
+
+The policy simulator result is not screenshotted: the simulator keeps no history, and its results are recorded in iam/notes.md.
+
+
 ## Day 2 — VPC networking
 
 **Goal:** a 3-tier VPC built from scratch, every route deliberate.
@@ -113,16 +138,42 @@ aws iam create-policy --policy-name app-data-access --policy-document file://wee
 cd week1/network
 VPC=$(aws ec2 create-vpc --cidr-block 10.20.0.0/16 --query Vpc.VpcId --output text --profile lab)
 aws ec2 create-tags --resources $VPC --tags Key=Name,Value=lab-vpc --profile lab
-# Public subnets (2 AZs), private app subnets (2 AZs), private data subnets (2 AZs)
-for az in a b; do
-  aws ec2 create-subnet --vpc-id $VPC --cidr-block 10.20.1.0/24 --availability-zone us-east-1$az --profile lab
-done
-# Repeat the pattern: public 10.20.1-2.0/24, app 10.20.11-12.0/24, data 10.20.21-22.0/24
-# Internet gateway for public, one NAT gateway for private egress, route tables per tier
-aws ec2 create-internet-gateway --profile lab
-# Flow logs on (non-negotiable habit)
+# Six subnets, 3 tiers x 2 AZs. Every subnet needs its OWN CIDR:
+# reusing one CIDR for both AZs fails with InvalidSubnet.Conflict.
+# Public tier (set MapPublicIpOnLaunch on these two after creation)
+aws ec2 create-subnet --vpc-id $VPC --cidr-block 10.20.1.0/24 --availability-zone us-east-1a --profile lab
+aws ec2 create-subnet --vpc-id $VPC --cidr-block 10.20.2.0/24 --availability-zone us-east-1b --profile lab
+# App tier
+aws ec2 create-subnet --vpc-id $VPC --cidr-block 10.20.11.0/24 --availability-zone us-east-1a --profile lab
+aws ec2 create-subnet --vpc-id $VPC --cidr-block 10.20.12.0/24 --availability-zone us-east-1b --profile lab
+# Data tier
+aws ec2 create-subnet --vpc-id $VPC --cidr-block 10.20.21.0/24 --availability-zone us-east-1a --profile lab
+aws ec2 create-subnet --vpc-id $VPC --cidr-block 10.20.22.0/24 --availability-zone us-east-1b --profile lab
+# Internet gateway for public: create AND attach (a detached IGW routes nothing)
+IGW=$(aws ec2 create-internet-gateway --query InternetGateway.InternetGatewayId --output text --profile lab)
+aws ec2 attach-internet-gateway --internet-gateway-id $IGW --vpc-id $VPC --profile lab
+# Flow logs on (non-negotiable habit). CloudWatch destination requires BOTH:
+# 1) the log group to exist, and 2) an IAM role the flow-logs service can assume,
+# passed as --deliver-logs-permission-arn. Without the role the call fails with
+# "DeliverLogsPermissionArn can't be empty if LogDestinationType is cloud-watch-logs".
+aws logs create-log-group --log-group-name /vpc/flowlogs --profile lab
+cat > flowlogs-trust.json <<'EOF'
+{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Service":"vpc-flow-logs.amazonaws.com"},"Action":"sts:AssumeRole"}]}
+EOF
+cat > flowlogs-perms.json <<'EOF'
+{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":["logs:CreateLogGroup","logs:CreateLogStream","logs:PutLogEvents","logs:DescribeLogGroups","logs:DescribeLogStreams"],"Resource":"arn:aws:logs:us-east-1:428101261622:log-group:/vpc/flowlogs:*"}]}
+EOF
+aws iam create-role --role-name w1-flowlogs-role --assume-role-policy-document file://flowlogs-trust.json --profile lab
+aws iam put-role-policy --role-name w1-flowlogs-role --policy-name flowlogs-write --policy-document file://flowlogs-perms.json --profile lab
+ROLE_ARN=$(aws iam get-role --role-name w1-flowlogs-role --query Role.Arn --output text --profile lab)
 aws ec2 create-flow-logs --resource-type VPC --resource-ids $VPC --traffic-type ALL \
-  --log-destination-type cloud-watch-logs --log-group-name /vpc/flowlogs --profile lab
+  --log-destination-type cloud-watch-logs --log-group-name /vpc/flowlogs \
+  --deliver-logs-permission-arn $ROLE_ARN --profile lab
+
+# Route tables: public to IGW, app/data to NAT, data tier no direct internet route back
+aws ec2 modify-subnet-attribute --subnet-id subnet-0937b3f3bac28d475 --map-public-ip-on-launch --profile lab
+aws ec2 modify-subnet-attribute --subnet-id subnet-06ae6b4b3948ee6c8 --map-public-ip-on-launch --profile lab
+
 ```
 
 Steps: build all six subnets, IGW, one NAT (note the cost trade-off of one NAT vs one per AZ), route tables (public to IGW, app/data to NAT, data tier no direct internet route back), security groups per tier (app accepts 443 from public SG only; data accepts 5432/3306 from app SG only), a VPC endpoint for S3, and compare security groups vs NACLs in your notes.
@@ -130,12 +181,61 @@ Steps: build all six subnets, IGW, one NAT (note the cost trade-off of one NAT v
 **Prove it:** network diagram in `week1/network/` plus the command log.
 **Drill:** "A private instance cannot reach S3. Walk me through your checks." (Route table, endpoint, DNS, SG egress, NACL, in that order.)
 
+### Screenshots (evidence)
+
+Captured 2026-11-16 from the AWS Console. Full checklist: [network/screenshots.md](network/screenshots.md).
+
+![lab-vpc detail](network/screenshots/01-vpc-detail.png)
+*Day 2: lab-vpc, vpc-0318b57b8c085ac94, CIDR 10.20.0.0/16.*
+
+![Six subnets](network/screenshots/02-subnets.png)
+*All six subnets: public, app, and data tiers across us-east-1a and us-east-1b.*
+
+![Public route table](network/screenshots/03-route-table-public.png)
+*w1-public-rt: 0.0.0.0/0 to the internet gateway.*
+
+![App route table](network/screenshots/04-route-table-private.png)
+*w1-app-rt: 0.0.0.0/0 to the NAT gateway, plus the S3 prefix-list route via the gateway endpoint.*
+
+![Internet gateway attached](network/screenshots/05-igw-attached.png)
+*igw-07d2ac783c35bfe01, Attached to lab-vpc.*
+
+![NAT gateway](network/screenshots/06-nat-gateway.png)
+*NAT gateway nat-088b4598c6227185c in w1-public-a, Available, with its Elastic IP.*
+
+![App security group inbound](network/screenshots/07-sg-app-inbound.png)
+*w1-app-sg inbound: 443 and 80 accepted only from w1-public-sg.*
+
+![Data security group inbound](network/screenshots/08-sg-data-inbound.png)
+*w1-data-sg inbound: 5432 and 3306 accepted only from w1-app-sg.*
+
+![S3 gateway endpoint](network/screenshots/09-s3-endpoint.png)
+*S3 gateway endpoint vpce-0865d395b0fc01d99, attached to the app and data route tables.*
+
+![Flow logs active](network/screenshots/10-flow-logs-active.png)
+*Flow log fl-0d62187ae88cfecef, Active, delivering to CloudWatch Logs /vpc/flowlogs.*
+
+
 ## Day 3 — Compute and storage
 
 **Goal:** EC2 done properly (user data, IAM role, no keys on the box), an Auto Scaling Group behind a load balancer, and S3 with every protection on.
 
 ```bash
 cd week1/compute
+# First create the three input files the commands below load (the guide originally
+# referenced them without ever giving their contents).
+cat > ec2-trust.json <<'EOF'
+{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Service":"ec2.amazonaws.com"},"Action":"sts:AssumeRole"}]}
+EOF
+cat > tt.json <<'EOF'
+{"PredefinedMetricSpecification":{"PredefinedMetricType":"ASGAverageCPUUtilization"},"TargetValue":50.0}
+EOF
+# lt-data.json: ImageId is the current Amazon Linux 2023 AMI as of 2026-11-15; refresh it with
+# aws ssm get-parameter --name /aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64
+# UserData (base64) installs httpd and serves a page naming the host.
+cat > lt-data.json <<'EOF'
+{"ImageId":"ami-096ef200a877f36af","InstanceType":"t3.micro","IamInstanceProfile":{"Name":"ec2-app-profile"},"MetadataOptions":{"HttpTokens":"required","HttpEndpoint":"enabled"},"UserData":"IyEvYmluL2Jhc2gKZG5mIGluc3RhbGwgLXkgaHR0cGQKZWNobyAiaGVsbG8gZnJvbSAkKGhvc3RuYW1lKSAtIHcxIGFwcCB0aWVyIiA+IC92YXIvd3d3L2h0bWwvaW5kZXguaHRtbApzeXN0ZW1jdGwgZW5hYmxlIC0tbm93IGh0dHBkCg==","TagSpecifications":[{"ResourceType":"instance","Tags":[{"Key":"Name","Value":"w1-app"}]}]}
+EOF
 # IAM role for instances (never access keys on an instance)
 aws iam create-role --role-name ec2-app-role --assume-role-policy-document file://ec2-trust.json --profile lab
 aws iam attach-role-policy --role-name ec2-app-role --policy-arn arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore --profile lab
@@ -144,12 +244,14 @@ aws iam add-role-to-instance-profile --instance-profile-name ec2-app-profile --r
 # Launch template with user data that installs and starts a web server
 aws ec2 create-launch-template --launch-template-name app-lt --version-description v1 \
   --launch-template-data file://lt-data.json --profile lab
-# Target group + ALB + listener, then the ASG (min 2, max 4, target tracking on CPU 50%)
-aws autoscaling create-auto-scaling-group --auto-scaling-group-name app-asg \
-  --launch-template LaunchTemplateName=app-lt --min-size 2 --max-size 4 --desired-capacity 2 \
-  --vpc-zone-identifier "<app-subnet-1>,<app-subnet-2>" --target-group-arns "<tg-arn>" --profile lab
-aws autoscaling put-scaling-policy --auto-scaling-group-name app-asg --policy-name cpu-tt \
-  --policy-type TargetTrackingScaling --target-tracking-configuration file://tt.json --profile lab
+# Target group + ALB + listener + ASG + scaling policy are built by day3-alb-asg.sh
+# in this folder (the original text had only <placeholder> values and no commands for
+# the target group, ALB, or listener). It needs the Day 2 security groups, so
+# week1/network/day2-part2.sh must have run first. It creates target group w1-app-tg,
+# ALB w1-alb in the public subnets, an HTTP listener, ASG app-asg (min 2, max 4,
+# desired 2) across the app subnets subnet-00a122ab6e0dd98b6 and
+# subnet-0d1c54470bab5f591, and the cpu-tt target-tracking policy from tt.json.
+bash day3-alb-asg.sh
 # S3 with versioning, encryption, lifecycle, and public access blocked — then prove the block
 aws s3api create-bucket --bucket derek-lab-app-data --profile lab
 aws s3api put-bucket-versioning --bucket derek-lab-app-data --versioning-configuration Status=Enabled --profile lab
@@ -159,27 +261,64 @@ aws s3api put-public-access-block --bucket derek-lab-app-data --public-access-bl
 **Prove it:** screenshots and notes in `week1/compute/`; write one line each on S3 durability vs availability and EBS vs instance store.
 **Drill:** "Why is the data tier in private subnets if the app needs updates?" (NAT for egress, no inbound route.)
 
+### Screenshots (evidence)
+
+Captured 2026-11-16 from the AWS Console. Full checklist: [compute/screenshots.md](compute/screenshots.md).
+
+![Launch template app-lt](compute/screenshots/01-launch-template.png)
+*Day 3: launch template app-lt, version 2 is the default.*
+
+![ASG app-asg details](compute/screenshots/02-asg-details.png)
+*app-asg: desired 2, min 2, max 4, launch template app-lt.*
+
+![ASG instances](compute/screenshots/03-asg-instances.png)
+*Both ASG instances InService, one in each AZ.*
+
+![ALB w1-alb](compute/screenshots/04-alb-details.png)
+*w1-alb, Active, HTTP 80 listener forwarding to w1-app-tg.*
+
+![Target health](compute/screenshots/05-target-health.png)
+*w1-app-tg: 2 targets, 2 healthy, 0 unhealthy. The day's test result.*
+
+![Instance IAM role](compute/screenshots/06-instance-role.png)
+*App instance security: IAM role ec2-app-role attached (via the ec2-app-profile instance profile), and no key pair assigned. No keys on the box.*
+
+![S3 bucket properties](compute/screenshots/08-s3-properties.png)
+*derek-lab-app-data: bucket versioning Enabled, default encryption SSE-S3.*
+
+![Session Manager](compute/screenshots/09-session-manager.png)
+*Systems Manager Session Manager: administration with no SSH port open.*
+
+Not captured: the ALB page itself (checklist item 07). The plain-HTTP ELB address is blocked in the local browser; the ALB was verified serving both app instances, one per AZ, by curl on 2026-11-16.
+
+
 ## Day 4 — RDS and data
 
 **Goal:** RDS where it belongs: private data subnets, Multi-AZ, backups, a read replica, failover tested.
 
 ```bash
 cd week1/data
-aws rds create-db-subnet-group --db-subnet-group-name data-subnets \
-  --db-subnet-group-description "Data tier" --subnet-ids <data-subnet-1> <data-subnet-2> --profile lab
-aws rds create-db-instance --db-instance-identifier app-db --db-instance-class db.t3.micro \
-  --engine postgres --engine-version 15 --master-username appadmin \
-  --master-user-password "<from-your-password-manager>" --allocated-storage 20 \
-  --db-subnet-group-name data-subnets --vpc-security-group-ids <data-sg> \
-  --multi-az --backup-retention-period 7 --storage-encrypted --no-publicly-accessible --profile lab
-aws rds create-db-instance-read-replica --db-instance-identifier app-db-rr \
-  --source-db-instance-identifier app-db --profile lab
-# Connect from the app-tier EC2 only, then test the failover
-aws rds reboot-db-instance --db-instance-identifier app-db --force-failover --profile lab
+# The whole day is scripted in this folder (the original text used <placeholder>
+# values for the subnets and security group and ran the replica and failover with
+# no waits, which RDS rejects while the primary is still creating):
+#   bash day4-rds.sh           subnet group, Multi-AZ primary, read replica, timed failover
+#   bash day4-restore-test.sh  snapshot, restore to a test instance, verify, delete it
+# Real values used: data subnets subnet-07d372477d86687b6 (us-east-1a) and
+# subnet-0bee8403720ad34ad (us-east-1b); data security group sg-07a562a0cf5a8e3f2
+# (w1-data-sg, 5432/3306 from the app SG only). Engine pinned to PostgreSQL 15.19,
+# the latest 15.x (verified 2026-11-16). The master password (user appadmin) is
+# prompted for by the script or read from $DB_MASTER_PASSWORD; it is never written
+# to a file. Cost note: Multi-AZ + replica is roughly $1.30/day against the $10
+# budget, so delete both instances when the day's tests are done.
 ```
 
 **Prove it:** a restore runbook note in `week1/data/` (snapshot restore steps, point-in-time recovery, expected timings).
 **Drill:** "When is RDS the wrong choice?" (Unstructured data at scale, extreme write throughput, global active-active — and what you would pick instead.)
+
+### Screenshots
+
+Pending: RDS is created and torn down in a single session to protect the $10 budget, so these shots are captured during the run. The checklist is in [data/screenshots.md](data/screenshots.md); the failover event and the restored instance exist only mid-run and are captured then.
+
 
 ## Day 5 — Security and compliance
 

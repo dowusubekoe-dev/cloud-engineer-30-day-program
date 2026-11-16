@@ -1,0 +1,97 @@
+# ============================================================================
+# Cloud Engineer 30-Day Program - .gitignore
+# Repo root: cloud-engineer-30/
+#
+# Principles:
+#   1. Proof stays in: notes, scripts, policies, and console screenshots are
+#      the portfolio evidence for this program and are committed on purpose.
+#   2. Secrets never enter: credentials, keys, and variable files with real
+#      values are excluded before anything else.
+#   3. Generated state stays out: Terraform state, dependency folders, and
+#      caches are rebuilt from source, never committed.
+# ============================================================================
+
+# --- Secrets and credentials (never commit) --------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+**/credentials
+*password*
+*.tfvars
+!*.tfvars.example
+.aws-sso-cache/
+
+# --- Terraform (Day 6 and Week 2) -------------------------------------------
+# State files can contain sensitive values and must never be committed.
+# .terraform.lock.hcl is NOT ignored: commit it, it pins provider versions.
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+
+# --- Cloud CLI and tool caches ----------------------------------------------
+.azure/
+gha-creds-*.json
+
+# --- Python (SmartLead, scripts, Week 2+) ------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# --- Node / JavaScript --------------------------------------------------------
+node_modules/
+.next/
+.npm/
+.eslintcache
+
+# --- Recordings and large media ----------------------------------------------
+# Drill recordings: GitHub rejects files over 100 MB and large media bloats
+# every clone. Keep recordings with the day's notes locally, or publish them
+# via GitHub Releases / Git LFS. Small audio (mp3, m4a) may still be committed.
+*.mp4
+*.mov
+*.mkv
+*.avi
+*.webm
+
+# --- Logs, temp, and backups --------------------------------------------------
+*.log
+*.tmp
+*.bak
+*.swp
+*~
+tmp/
+temp/
+
+# --- OS and editor ------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+*Zone.Identifier
+.idea/
+.vscode/
+*.code-workspace
+
+# --- Explicitly kept (do not ignore) ------------------------------------------
+# week1/*/screenshots/*.png  - console evidence, committed on purpose
+# **/*.tfvars.example        - variable templates with placeholder values
+# .terraform.lock.hcl        - provider version lock, commit it
