@@ -10,17 +10,17 @@
   each member account's own administrators. (SCPs do not apply to the
   management account itself.)
 
-## Decisions left for you (fill in, then delete this section's prompts)
+## Decisions I still need to make (fill in, then delete the prompts)
 ### Permission boundary
 1. Which services does the role under this boundary actually need?
    Template starts with EC2, S3, Lambda, CloudWatch, Logs. Add or remove.
 2. Is `iam:PassRole` a full deny for this role, or should it be allowed only
    to specific services (for example Lambda and EC2)? A scoped PassRole is
    the more senior answer; write the condition if you choose it.
-3. Why this boundary exists, in your words (2-3 sentences):
+3. Why this boundary exists, in my words (2-3 sentences):
 
 ### SCP deny list
-1. CloudTrail tampering is denied because: (your words — think evidence)
+1. CloudTrail tampering is denied because: (my words — think evidence)
 2. Disabling detection (Config, GuardDuty, Security Hub) is denied because:
 3. Disabling encryption (EBS default encryption off, KMS key disable or
    deletion) is denied because:

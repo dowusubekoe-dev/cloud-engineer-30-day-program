@@ -6,7 +6,7 @@
 - Primary `app-db`: PostgreSQL 15.19 (latest 15.x verified 2026-11-16), db.t3.micro, 20 GB, Multi-AZ, storage encrypted, **not** publicly accessible, automated backups retained 7 days.
 - Security group `sg-07a562a0cf5a8e3f2` (w1-data-sg): 5432 and 3306 accepted only from the app security group. There is no path from the internet, or from any other tier, to this database.
 - Read replica `app-db-rr`: same class, for read scaling and as a promotable copy. A replica is **not** a backup and **not** automatic failover; Multi-AZ is the failover mechanism, backups are the recovery mechanism. Three different tools, three different jobs.
-- Master username `appadmin`. The password comes from Derek's password manager at run time; it is never written into any file or script.
+- Master username `appadmin`. The password comes from my password manager at run time; it is never written into any file or script.
 
 ## Cost note (read before running)
 

@@ -1,6 +1,6 @@
 # Day 3 Notes: Compute and Storage
 
-## What Day 3 builds
+## What I built on Day 3
 
 - IAM role `ec2-app-role` (trust: EC2 service only, `ec2-trust.json`) with `AmazonSSMManagedInstanceCore` attached, carried by instance profile `ec2-app-profile`. Instances get credentials from the role at runtime: **no access keys are ever stored on a box.**
 - Launch template `app-lt`: Amazon Linux 2023 (`ami-096ef200a877f36af`, current as of 2026-11-15), t3.micro, IMDSv2 required, user data installs httpd and serves a page naming the host. A second template version adds the app security group once Day 2's groups exist.

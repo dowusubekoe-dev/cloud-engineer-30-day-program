@@ -1,6 +1,6 @@
 # Cloud Engineer 30-Day Program — Step-by-Step Execution Guide
 
-**For Derek Owusu Bekoe.** This README is the working guide for the full 30 days: every day has a goal, numbered steps, and the exact commands, scripts, and code to run. It consolidates the 30-Day Program overview, the Week 1 AWS Reactivation Guide, the Weeks 2–4 Detailed Guide, and the 2026-11-14 Plan Update (SmartLead on Azure, Datadog, revised capstone).
+This README is the working guide for the full 30 days: every day has a goal, numbered steps, and the exact commands, scripts, and code to run. It consolidates the 30-Day Program overview, the Week 1 AWS Reactivation Guide, the Weeks 2–4 Detailed Guide, and the 2026-11-14 Plan Update (SmartLead on Azure, Datadog, revised capstone).
 
 ## How each day works
 
@@ -11,7 +11,7 @@
 | Prove it | 30 min | Leave an artifact: code in GitHub, a diagram, a runbook note, or a write-up. No artifact, the day is not done. |
 | Interview drill | 20–30 min | Answer 2–3 likely questions out loud using a real Veolia example. Record yourself at least twice a week. |
 
-Rules: apply to jobs in parallel; the program supports the search, never replaces it. Free-tier resources wherever possible. Billing alerts set before you build anything. Tear down paid resources the same day unless a step says to keep them. Miss a day: pick up where you left off, never double up. In the Focus System, the Wednesday One Block follows the plan week by week.
+Rules: Use free-tier resources wherever possible. Billing alerts set before you build anything. Tear down paid resources the same day unless a step says to keep them. Miss a day: pick up where you left off, never double up.
 
 ## Before Day 1: setup (30 minutes, once)
 
@@ -68,7 +68,8 @@ cd cloud-engineer-30 && git init && git add -A && git commit -m "Program setup"
 
 # WEEK 1 — AWS REACTIVATION (Days 1–7)
 
-Goal for the week: design, build, and explain your core AWS platform from memory. Checkpoint artifact: a Terraform repo deploying a secure VPC + EC2 + RDS stack, with a one-page architecture diagram.
+Goal for the week: design, build, and explain your core AWS platform from memory.
+Checkpoint artifact: a Terraform repo deploying a secure VPC + EC2 + RDS stack, with a one-page architecture diagram.
 
 ## Day 1 — IAM deep refresh
 
@@ -103,7 +104,7 @@ aws iam create-policy --policy-name app-data-access --policy-document file://wee
 
 3. Create a permission boundary and an SCP-style deny in notes: what would you block org-wide (leaving CloudTrail, disabling encryption) and why.
 4. **Prove it:** policies and notes in `week1/iam/`.
-5. **Drill:** "Design IAM for a 3-team company" — say it out loud, record it.
+5. **Drill:** "Design IAM for a 3-team company".
 
 ### Screenshots (evidence)
 
@@ -122,7 +123,7 @@ Captured 2026-11-16 from the AWS Console. Full checklist: [iam/screenshots.md](i
 *AWS Budgets: monthly-guard, $10 budget, 80% actual-cost alert, not exceeded.*
 
 ![CloudTrail trails](iam/screenshots/06-cloudtrail-trails.png)
-*CloudTrail in this account: no trails configured. An open item to trace before Day 5.*
+*CloudTrail in this account: no trails configured. Traced 2026-11-16: Day 5's trace step uses the always-on 90-day Event history, so no trail is required for Day 5. Why the organization trail is missing remains an open question, separate from Day 5.*
 
 ![IAM dashboard](iam/screenshots/07-iam-dashboard.png)
 *IAM dashboard: account resources and security recommendations.*
@@ -289,7 +290,7 @@ Captured 2026-11-16 from the AWS Console. Full checklist: [compute/screenshots.m
 ![Session Manager](compute/screenshots/09-session-manager.png)
 *Systems Manager Session Manager: administration with no SSH port open.*
 
-Not captured: the ALB page itself (checklist item 07). The plain-HTTP ELB address is blocked in the local browser; the ALB was verified serving both app instances, one per AZ, by curl on 2026-11-16.
+Not captured: the ALB page itself (checklist item 07). The plain-HTTP ELB address is blocked in the local browser; the ALB was serving both app instances, one per AZ, verified by curl on 2026-11-16.
 
 
 ## Day 4 — RDS and data
@@ -324,21 +325,17 @@ Pending: RDS is created and torn down in a single session to protect the $10 bud
 
 **Goal:** detection turned on, one deliberate violation, one remediation, evidence both ways.
 
+**Patched 2026-11-16.** The original section could not run as written: it used a `<config-role-arn>` placeholder with no step that creates the Config recorder role, referenced a `s3-encryption-rule.json` file it never provided, never enabled Security Hub, and used a different deliberate violation (an unencrypted bucket) than the prepared lab. The working package lives in `week1/security/`: `day5-security.sh`, `notes.md`, `finding-note.md`, `drill-script-security.md`, `command-log.md`, `screenshots.md`.
+
 ```bash
 cd week1/security
-aws guardduty create-detector --enable --profile lab
-aws configservice put-configuration-recorder --configuration-recorder name=default,roleARN=<config-role-arn> --profile lab
-aws configservice start-configuration-recorder --configuration-recorder-name default --profile lab
-aws configservice put-config-rule --config-rule file://s3-encryption-rule.json --profile lab
-aws inspector2 enable --resource-types EC2 --profile lab
-# Deliberate violation: an unencrypted bucket
-aws s3api create-bucket --bucket derek-lab-violation --profile lab
-# Watch Config flag it, then remediate and watch it clear
-aws configservice get-compliance-details-by-config-rule --config-rule-name s3-bucket-server-side-encryption-enabled --profile lab
+./day5-security.sh
 ```
 
-**Prove it:** before/after evidence in `week1/security/`.
-**Drill:** tell your Veolia threat-detection story as a STAR answer (GuardDuty, Config, Inspector at 500+ user scale).
+The script enables GuardDuty, AWS Config (recorder plus five managed rules, including restricted-common-ports), Inspector, and Security Hub. It then creates the deliberate misconfiguration: security group `w1-bad-sg` in the Day 2 VPC allowing port 22 from 0.0.0.0/0, plus a throwaway S3 bucket. It stops before remediation so you capture the "before" evidence first: the NON-COMPLIANT Config evaluation for w1-bad-sg, and the CloudTrail Event history entry for its creation (Event history is always on for 90 days, so this step needs no trail; the empty trails list in the management account does not block Day 5). Remediation and the "after" evidence are walked through in `notes.md` and the drill script. Generating sample findings in Security Hub is the one console-only step. Teardown commands are at the end of the script; the deliberate resources are deleted the same day.
+
+**Prove it:** before/after evidence in `week1/security/` (finding-note.md completed, screenshots per screenshots.md).
+**Drill:** `drill-script-security.md` word for word, plus tell your Veolia threat-detection story as a STAR answer (GuardDuty, Config, Inspector at 500+ user scale).
 
 ## Day 6 — Terraform rebuild
 
@@ -367,17 +364,25 @@ module "data"    { source = "./modules/data" }      # RDS from Day 4
 
 ```bash
 cd week1/terraform
-aws s3api create-bucket --bucket derek-lab-tfstate --profile lab
-aws s3api put-bucket-versioning --bucket derek-lab-tfstate --versioning-configuration Status=Enabled --profile lab
-aws dynamodb create-table --table-name derek-lab-tflock --attribute-definitions AttributeName=LockID,AttributeType=S \
-  --key-schema AttributeName=LockID,KeyType=HASH --billing-mode PAY_PER_REQUEST --profile lab
+# Before init: decide import (Path A) or greenfield (Path B) - the
+# Day 2 to 4 stack already exists by hand, so a parallel apply fails
+# on unique ALB / ASG / launch template names. The decision, the
+# current-state inventory (lab off, NAT deleted on purpose, RDS
+# deleted with snapshot app-db-manual-1 kept), and the Prove-it
+# checklist are in the Day 6 prep package (notes.md).
+bash day6-bootstrap.sh   # state bucket + lock table, check-first
 terraform init && terraform fmt -check && terraform validate
-terraform plan -out=tfplan && terraform apply tfplan
-terraform destroy            # prove the teardown works
-terraform apply -auto-approve # re-apply cleanly; this stack is Week 1's checkpoint
+terraform plan -out=tfplan   # read it: NAT create expected, no
+                             # unexplained destroys
+terraform apply tfplan
+# Same day, no exceptions: rehearse destroy OR run lab-off and
+# record the cost decision in notes.md. Full rate is $75-80/month
+# against a $10 budget; the NAT gateway is about $32 of it.
 ```
 
 **Prove it:** the working Terraform repo (Week 1 checkpoint, part 1).
+**Status:** completed 2026-11-24, Path B (greenfield): I tore down the hand-built stack and applied 39 resources fresh under Terraform, verified end to end. Run record: `week1/terraform/notes.md`.
+
 
 ## Day 7 — HA, cost, and Week 1 review
 
@@ -389,6 +394,20 @@ terraform apply -auto-approve # re-apply cleanly; this stack is Week 1's checkpo
 
 **Prove it:** diagram + self-review in `week1/`.
 **Drill:** re-answer the Day 1 IAM design question and the Day 2 S3 troubleshooting question, cold, recorded.
+
+**Status 2026-11-25: Day 7 completed, Week 1 closed.** I re-applied
+the Day 6 stack (39 resources) and turned the lab on. HA test: I
+removed us-east-1a from the ASG; the ASG replaced the lost instance
+inside us-east-1b in 37 seconds, full healthy capacity returned in
+3m31s, and the ALB never stopped answering (evidence:
+week1/checkpoint/ha-test.log). Security Hub, scored from the CLI:
+Foundational 80%, overall 76% (the Day 5 baseline caveat and the CIS
+console-only note are in week1/checkpoint/notes.md). Cost pass:
+November to date $16.37 against the $10 budget, top cost the ALB,
+then EC2-Other and AWS Config. Diagram and self-review are in
+week1/; the drill script is in week1/checkpoint/. I destroyed the
+stack the same day and verified it gone (state 0, snapshot kept,
+recorder stopped). Working files: week1/checkpoint/.
 
 ---
 

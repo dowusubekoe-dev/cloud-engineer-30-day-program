@@ -1,6 +1,6 @@
 # Day 2 Notes: VPC Networking
 
-## What was built
+## What I built
 
 VPC `vpc-0318b57b8c085ac94` (Name: lab-vpc), 10.20.0.0/16, us-east-1.
 
@@ -20,7 +20,7 @@ Routing design (applied by `day2-part2.sh`): public route table sends 0.0.0.0/0 
 
 ## NAT cost trade-off: one NAT vs one per AZ
 
-This build uses **one NAT gateway** in public-a for both AZs.
+I used **one NAT gateway** in public-a for both AZs.
 
 - Cost of one NAT: about $0.045/hour (roughly $32/month) plus $0.045 per GB processed. One per AZ doubles the hourly cost.
 - Risk accepted: the NAT lives in us-east-1a. If that AZ fails, private subnets in us-east-1b also lose internet egress, even though they are healthy. Cross-AZ traffic to the NAT also incurs small cross-AZ data charges.

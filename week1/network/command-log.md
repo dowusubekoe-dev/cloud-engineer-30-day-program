@@ -49,3 +49,7 @@ It creates: one NAT gateway in w1-public-a with an Elastic IP; route tables w1-p
 - `InvalidSubnet.Conflict`: the original guide loop reused CIDR 10.20.1.0/24 for both AZs. Every subnet needs its own CIDR. Guide patched.
 - `InvalidParameter` on CreateFlowLogs ("DeliverLogsPermissionArn can't be empty"): CloudWatch destination requires an IAM role ARN and an existing log group. Guide patched.
 - First build attempt left two partial VPCs tangled (vpc-0eea4604f7b3a4f13, vpc-015bdbac6d757965a); both were torn down fully (subnets, flow logs, IGWs, log group, role) before the clean run above. Day 1 IAM work was not touched.
+
+## NAT gateway deleted, 2026-11-19 (my cost cut)
+
+nat-088b4598c6227185c deleted and its Elastic IP eipalloc-0965394e90c6fa682 released, verified live (0 NAT gateways remain). Reason: NAT hours were the largest line on the November bill ($2.52 month to date, about $32/month at full rate) against a $10 budget. The private route table still points at the deleted NAT (harmless blackhole). Day 6 Terraform rebuild recreates the NAT gateway and a fresh EIP as code. ALB w1-alb and ASG app-asg deliberately kept as Day 6 reference.
