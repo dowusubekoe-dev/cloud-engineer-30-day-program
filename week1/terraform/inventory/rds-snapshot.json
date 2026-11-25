@@ -1,0 +1,36 @@
+{
+    "DBSnapshots": [
+        {
+            "DBSnapshotIdentifier": "app-db-manual-1",
+            "DBInstanceIdentifier": "app-db",
+            "SnapshotCreateTime": "2026-11-16T13:11:11.248000+00:00",
+            "Engine": "postgres",
+            "AllocatedStorage": 20,
+            "Status": "available",
+            "Port": 5432,
+            "AvailabilityZone": "us-east-1b",
+            "VpcId": "vpc-0318b57b8c085ac94",
+            "InstanceCreateTime": "2026-11-16T12:39:50.252000+00:00",
+            "MasterUsername": "appadmin",
+            "EngineVersion": "15.19",
+            "LicenseModel": "postgresql-license",
+            "SnapshotType": "manual",
+            "StorageThroughput": 0,
+            "OptionGroupName": "default:postgres-15",
+            "PercentProgress": 100,
+            "StorageType": "gp2",
+            "Encrypted": true,
+            "BackupRetentionPeriod": 7,
+            "PreferredBackupWindow": "04:45-05:15",
+            "KmsKeyId": "arn:aws:kms:us-east-1:428101261622:key/38695e2e-8f35-4d9e-9564-0aaf84d136f7",
+            "DBSnapshotArn": "arn:aws:rds:us-east-1:428101261622:snapshot:app-db-manual-1",
+            "IAMDatabaseAuthenticationEnabled": false,
+            "DbiResourceId": "db-JKURJKLWFF3WA5PQHPDYZSSVOM",
+            "TagList": [],
+            "SnapshotTarget": "region",
+            "OriginalSnapshotCreateTime": "2026-11-16T13:11:11.248000+00:00",
+            "MultiTenant": false,
+            "DedicatedLogVolume": false
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+terraform {
+  required_version = ">= 1.6"
+  required_providers { aws = { source = "hashicorp/aws", version = "~> 5.0" } }
+  backend "s3" {
+    bucket         = "derek-lab-tfstate"
+    key            = "week1/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "derek-lab-tflock"
+    encrypt        = true
+  }
+}
+provider "aws" { region = "us-east-1" }
+
+module "network" { source = "./modules/network" }   # VPC, subnets, routes, SGs from Day 2
+module "compute" { source = "./modules/compute" }   # LT + ASG + ALB from Day 3
+module "data"    { source = "./modules/data" }      # RDS from Day 4

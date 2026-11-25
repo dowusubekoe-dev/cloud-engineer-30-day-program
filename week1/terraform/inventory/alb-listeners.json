@@ -1,0 +1,27 @@
+{
+    "Listeners": [
+        {
+            "ListenerArn": "arn:aws:elasticloadbalancing:us-east-1:428101261622:listener/app/w1-alb/24bd91127d345938/776e01738cefb026",
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:428101261622:loadbalancer/app/w1-alb/24bd91127d345938",
+            "Port": 80,
+            "Protocol": "HTTP",
+            "DefaultActions": [
+                {
+                    "Type": "forward",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:428101261622:targetgroup/w1-app-tg/6c8d37ed52d2697f",
+                    "ForwardConfig": {
+                        "TargetGroups": [
+                            {
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:428101261622:targetgroup/w1-app-tg/6c8d37ed52d2697f",
+                                "Weight": 1
+                            }
+                        ],
+                        "TargetGroupStickinessConfig": {
+                            "Enabled": false
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

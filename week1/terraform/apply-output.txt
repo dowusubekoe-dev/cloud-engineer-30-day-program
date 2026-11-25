@@ -1,0 +1,149 @@
+module.network.aws_eip.nat: Creating...
+module.network.aws_vpc.w1: Creating...
+module.network.aws_eip.nat: Creation complete after 2s [id=eipalloc-0ea84ed505cab5c87]
+module.network.aws_vpc.w1: Still creating... [11s elapsed]
+module.network.aws_vpc.w1: Creation complete after 13s [id=vpc-07508b0cc13c602dc]
+module.network.aws_security_group.app: Creating...
+module.network.aws_subnet.data[0]: Creating...
+module.network.aws_subnet.data[1]: Creating...
+module.network.aws_subnet.app[1]: Creating...
+module.network.aws_subnet.public[1]: Creating...
+module.network.aws_internet_gateway.w1: Creating...
+module.network.aws_subnet.app[0]: Creating...
+module.network.aws_security_group.public: Creating...
+module.network.aws_subnet.public[0]: Creating...
+module.network.aws_security_group.data: Creating...
+module.network.aws_subnet.data[0]: Creation complete after 1s [id=subnet-092934abd2140e59a]
+module.compute.aws_lb_target_group.app: Creating...
+module.network.aws_subnet.app[1]: Creation complete after 1s [id=subnet-09048ee04f90f7802]
+module.network.aws_internet_gateway.w1: Creation complete after 1s [id=igw-0ad5b9dde9c2f4336]
+module.network.aws_route_table.public: Creating...
+module.network.aws_subnet.app[0]: Creation complete after 1s [id=subnet-015c60e597e948476]
+module.network.aws_subnet.data[1]: Creation complete after 1s [id=subnet-097476802f2e63c70]
+module.data.aws_db_subnet_group.w1: Creating...
+module.network.aws_security_group.app: Creation complete after 2s [id=sg-0a27eb4898b81dc32]
+module.network.aws_vpc_security_group_egress_rule.app_all: Creating...
+module.compute.aws_launch_template.app: Creating...
+module.network.aws_security_group.public: Creation complete after 2s [id=sg-0b1c5bb9c6f4f46b9]
+module.network.aws_vpc_security_group_egress_rule.app_all: Creation complete after 0s [id=sgr-0357e685f65b77256]
+module.network.aws_security_group.data: Creation complete after 2s [id=sg-04f6a4af1b9a8eccc]
+module.network.aws_vpc_security_group_ingress_rule.app_https: Creating...
+module.network.aws_vpc_security_group_ingress_rule.public_https: Creating...
+module.network.aws_vpc_security_group_ingress_rule.app_http: Creating...
+module.network.aws_vpc_security_group_egress_rule.public_all: Creating...
+module.compute.aws_lb_target_group.app: Creation complete after 1s [id=arn:aws:elasticloadbalancing:us-east-1:428101261622:targetgroup/w1-app-tg/f39e5b4fc70e1bba]
+module.network.aws_vpc_security_group_ingress_rule.public_http: Creating...
+module.network.aws_vpc_security_group_ingress_rule.app_https: Creation complete after 0s [id=sgr-01e3b17d10320c9b0]
+module.network.aws_vpc_security_group_egress_rule.data_all: Creating...
+module.network.aws_vpc_security_group_ingress_rule.public_https: Creation complete after 0s [id=sgr-0cf9f50532366e12c]
+module.network.aws_route_table.public: Creation complete after 1s [id=rtb-07738bc103b17f4c2]
+module.network.aws_vpc_security_group_ingress_rule.app_http: Creation complete after 0s [id=sgr-03090de1d0f30706e]
+module.network.aws_vpc_security_group_ingress_rule.data_postgres: Creating...
+module.network.aws_vpc_security_group_egress_rule.public_all: Creation complete after 0s [id=sgr-0083c733d8d0b275f]
+module.network.aws_vpc_security_group_ingress_rule.data_mysql: Creating...
+module.network.aws_vpc_security_group_ingress_rule.public_http: Creation complete after 0s [id=sgr-0d24ce262e785dded]
+module.network.aws_vpc_security_group_egress_rule.data_all: Creation complete after 0s [id=sgr-0d3f5100e1a847c26]
+module.data.aws_db_subnet_group.w1: Creation complete after 2s [id=w1-data-subnet-group]
+module.network.aws_vpc_security_group_ingress_rule.data_mysql: Creation complete after 1s [id=sgr-0e7a68b391c11cdef]
+module.data.aws_db_instance.app: Creating...
+module.network.aws_vpc_security_group_ingress_rule.data_postgres: Creation complete after 1s [id=sgr-0de9a21e16af012d3]
+module.compute.aws_launch_template.app: Creation complete after 6s [id=lt-05ac63567826d4135]
+module.compute.aws_autoscaling_group.app: Creating...
+module.network.aws_subnet.public[1]: Still creating... [10s elapsed]
+module.network.aws_subnet.public[0]: Still creating... [10s elapsed]
+module.network.aws_subnet.public[1]: Creation complete after 11s [id=subnet-0dbbf5a1c7742a613]
+module.data.aws_db_instance.app: Still creating... [10s elapsed]
+module.network.aws_subnet.public[0]: Creation complete after 15s [id=subnet-065ac412f20a34837]
+module.network.aws_route_table_association.public[1]: Creating...
+module.network.aws_route_table_association.public[0]: Creating...
+module.network.aws_nat_gateway.w1: Creating...
+module.compute.aws_lb.w1: Creating...
+module.network.aws_route_table_association.public[1]: Creation complete after 0s [id=rtbassoc-016ca284164146c42]
+module.network.aws_route_table_association.public[0]: Creation complete after 0s [id=rtbassoc-07827b97aeffaf066]
+module.compute.aws_autoscaling_group.app: Still creating... [10s elapsed]
+module.data.aws_db_instance.app: Still creating... [20s elapsed]
+module.compute.aws_autoscaling_group.app: Creation complete after 16s [id=app-asg]
+module.network.aws_nat_gateway.w1: Still creating... [10s elapsed]
+module.compute.aws_lb.w1: Still creating... [10s elapsed]
+module.data.aws_db_instance.app: Still creating... [30s elapsed]
+module.network.aws_nat_gateway.w1: Still creating... [20s elapsed]
+module.compute.aws_lb.w1: Still creating... [20s elapsed]
+module.data.aws_db_instance.app: Still creating... [41s elapsed]
+module.network.aws_nat_gateway.w1: Still creating... [31s elapsed]
+module.compute.aws_lb.w1: Still creating... [31s elapsed]
+module.data.aws_db_instance.app: Still creating... [51s elapsed]
+module.network.aws_nat_gateway.w1: Still creating... [41s elapsed]
+module.compute.aws_lb.w1: Still creating... [41s elapsed]
+module.data.aws_db_instance.app: Still creating... [1m1s elapsed]
+module.network.aws_nat_gateway.w1: Still creating... [51s elapsed]
+module.compute.aws_lb.w1: Still creating... [51s elapsed]
+module.data.aws_db_instance.app: Still creating... [1m11s elapsed]
+module.network.aws_nat_gateway.w1: Still creating... [1m2s elapsed]
+module.compute.aws_lb.w1: Still creating... [1m2s elapsed]
+module.data.aws_db_instance.app: Still creating... [1m21s elapsed]
+module.network.aws_nat_gateway.w1: Still creating... [1m12s elapsed]
+module.compute.aws_lb.w1: Still creating... [1m12s elapsed]
+module.data.aws_db_instance.app: Still creating... [1m31s elapsed]
+module.network.aws_nat_gateway.w1: Still creating... [1m22s elapsed]
+module.compute.aws_lb.w1: Still creating... [1m22s elapsed]
+module.data.aws_db_instance.app: Still creating... [1m41s elapsed]
+module.network.aws_nat_gateway.w1: Still creating... [1m32s elapsed]
+module.compute.aws_lb.w1: Still creating... [1m32s elapsed]
+module.network.aws_nat_gateway.w1: Creation complete after 1m37s [id=nat-05b2b704bdbb8f9d2]
+module.network.aws_route_table.data: Creating...
+module.network.aws_route_table.app: Creating...
+module.network.aws_route_table.data: Creation complete after 1s [id=rtb-0f235938206035357]
+module.network.aws_route_table_association.data[0]: Creating...
+module.network.aws_route_table_association.data[1]: Creating...
+module.network.aws_route_table_association.data[0]: Creation complete after 1s [id=rtbassoc-03292dac5be6ad2fa]
+module.network.aws_route_table_association.data[1]: Creation complete after 1s [id=rtbassoc-01df1dda405c5f29e]
+module.network.aws_route_table.app: Creation complete after 2s [id=rtb-0fa8a680ce61a9951]
+module.network.aws_route_table_association.app[1]: Creating...
+module.network.aws_route_table_association.app[0]: Creating...
+module.network.aws_vpc_endpoint.s3: Creating...
+module.network.aws_route_table_association.app[1]: Creation complete after 0s [id=rtbassoc-05fd1791b005ea57b]
+module.network.aws_route_table_association.app[0]: Creation complete after 0s [id=rtbassoc-050de6af6b2b7210c]
+module.data.aws_db_instance.app: Still creating... [1m52s elapsed]
+module.compute.aws_lb.w1: Still creating... [1m42s elapsed]
+module.network.aws_vpc_endpoint.s3: Creation complete after 7s [id=vpce-0541f310e81081a23]
+module.data.aws_db_instance.app: Still creating... [2m2s elapsed]
+module.compute.aws_lb.w1: Still creating... [1m52s elapsed]
+module.data.aws_db_instance.app: Still creating... [2m12s elapsed]
+module.compute.aws_lb.w1: Still creating... [2m2s elapsed]
+module.data.aws_db_instance.app: Still creating... [2m23s elapsed]
+module.compute.aws_lb.w1: Still creating... [2m13s elapsed]
+module.data.aws_db_instance.app: Still creating... [2m33s elapsed]
+module.compute.aws_lb.w1: Still creating... [2m23s elapsed]
+module.compute.aws_lb.w1: Creation complete after 2m25s [id=arn:aws:elasticloadbalancing:us-east-1:428101261622:loadbalancer/app/w1-alb/4955ba211b8315ed]
+module.compute.aws_lb_listener.http: Creating...
+module.compute.aws_lb_listener.http: Creation complete after 0s [id=arn:aws:elasticloadbalancing:us-east-1:428101261622:listener/app/w1-alb/4955ba211b8315ed/233b6e5e9b88b44b]
+module.data.aws_db_instance.app: Still creating... [2m43s elapsed]
+module.data.aws_db_instance.app: Still creating... [2m54s elapsed]
+module.data.aws_db_instance.app: Still creating... [3m4s elapsed]
+module.data.aws_db_instance.app: Still creating... [3m14s elapsed]
+module.data.aws_db_instance.app: Still creating... [3m25s elapsed]
+module.data.aws_db_instance.app: Still creating... [3m35s elapsed]
+module.data.aws_db_instance.app: Still creating... [3m45s elapsed]
+module.data.aws_db_instance.app: Still creating... [3m56s elapsed]
+module.data.aws_db_instance.app: Still creating... [4m6s elapsed]
+module.data.aws_db_instance.app: Still creating... [4m16s elapsed]
+module.data.aws_db_instance.app: Still creating... [4m26s elapsed]
+module.data.aws_db_instance.app: Still creating... [4m37s elapsed]
+module.data.aws_db_instance.app: Still creating... [4m47s elapsed]
+module.data.aws_db_instance.app: Still creating... [4m57s elapsed]
+module.data.aws_db_instance.app: Still creating... [5m7s elapsed]
+module.data.aws_db_instance.app: Still creating... [5m17s elapsed]
+module.data.aws_db_instance.app: Still creating... [5m27s elapsed]
+module.data.aws_db_instance.app: Still creating... [5m38s elapsed]
+module.data.aws_db_instance.app: Still creating... [5m48s elapsed]
+module.data.aws_db_instance.app: Still creating... [5m58s elapsed]
+module.data.aws_db_instance.app: Still creating... [6m9s elapsed]
+module.data.aws_db_instance.app: Still creating... [6m19s elapsed]
+module.data.aws_db_instance.app: Still creating... [6m29s elapsed]
+module.data.aws_db_instance.app: Still creating... [6m39s elapsed]
+module.data.aws_db_instance.app: Still creating... [6m50s elapsed]
+module.data.aws_db_instance.app: Still creating... [7m0s elapsed]
+module.data.aws_db_instance.app: Creation complete after 7m9s [id=db-BOYBYKLKJPJP4UJJRMGKYB5SQU]
+
+Apply complete! Resources: 39 added, 0 changed, 0 destroyed.
+APPLY-EXIT:0

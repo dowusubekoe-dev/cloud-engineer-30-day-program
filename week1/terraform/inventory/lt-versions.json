@@ -1,0 +1,76 @@
+{
+    "LaunchTemplateVersions": [
+        {
+            "LaunchTemplateId": "lt-0017618e72f7a77f8",
+            "LaunchTemplateName": "app-lt",
+            "VersionNumber": 2,
+            "CreateTime": "2026-11-16T12:20:30+00:00",
+            "CreatedBy": "arn:aws:iam::428101261622:user/derek-admin",
+            "DefaultVersion": true,
+            "LaunchTemplateData": {
+                "IamInstanceProfile": {
+                    "Name": "ec2-app-profile"
+                },
+                "ImageId": "ami-096ef200a877f36af",
+                "InstanceType": "t3.micro",
+                "UserData": "IyEvYmluL2Jhc2gKZG5mIGluc3RhbGwgLXkgaHR0cGQKZWNobyAiaGVsbG8gZnJvbSAkKGhvc3RuYW1lKSAtIHcxIGFwcCB0aWVyIiA+IC92YXIvd3d3L2h0bWwvaW5kZXguaHRtbApzeXN0ZW1jdGwgZW5hYmxlIC0tbm93IGh0dHBkCg==",
+                "TagSpecifications": [
+                    {
+                        "ResourceType": "instance",
+                        "Tags": [
+                            {
+                                "Key": "Name",
+                                "Value": "w1-app"
+                            }
+                        ]
+                    }
+                ],
+                "SecurityGroupIds": [
+                    "sg-0c98cb13774afeabf"
+                ],
+                "MetadataOptions": {
+                    "HttpTokens": "required",
+                    "HttpEndpoint": "enabled"
+                }
+            },
+            "Operator": {
+                "Managed": false
+            }
+        },
+        {
+            "LaunchTemplateId": "lt-0017618e72f7a77f8",
+            "LaunchTemplateName": "app-lt",
+            "VersionNumber": 1,
+            "VersionDescription": "v1",
+            "CreateTime": "2026-11-15T14:50:15+00:00",
+            "CreatedBy": "arn:aws:iam::428101261622:user/derek-admin",
+            "DefaultVersion": false,
+            "LaunchTemplateData": {
+                "IamInstanceProfile": {
+                    "Name": "ec2-app-profile"
+                },
+                "ImageId": "ami-096ef200a877f36af",
+                "InstanceType": "t3.micro",
+                "UserData": "IyEvYmluL2Jhc2gKZG5mIGluc3RhbGwgLXkgaHR0cGQKZWNobyAiaGVsbG8gZnJvbSAkKGhvc3RuYW1lKSAtIHcxIGFwcCB0aWVyIiA+IC92YXIvd3d3L2h0bWwvaW5kZXguaHRtbApzeXN0ZW1jdGwgZW5hYmxlIC0tbm93IGh0dHBkCg==",
+                "TagSpecifications": [
+                    {
+                        "ResourceType": "instance",
+                        "Tags": [
+                            {
+                                "Key": "Name",
+                                "Value": "w1-app"
+                            }
+                        ]
+                    }
+                ],
+                "MetadataOptions": {
+                    "HttpTokens": "required",
+                    "HttpEndpoint": "enabled"
+                }
+            },
+            "Operator": {
+                "Managed": false
+            }
+        }
+    ]
+}

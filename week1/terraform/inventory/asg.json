@@ -1,0 +1,58 @@
+{
+    "AutoScalingGroups": [
+        {
+            "AutoScalingGroupName": "app-asg",
+            "AutoScalingGroupARN": "arn:aws:autoscaling:us-east-1:428101261622:autoScalingGroup:232a1ca4-47bf-4c51-892f-b5de9301236b:autoScalingGroupName/app-asg",
+            "LaunchTemplate": {
+                "LaunchTemplateId": "lt-0017618e72f7a77f8",
+                "LaunchTemplateName": "app-lt"
+            },
+            "MinSize": 0,
+            "MaxSize": 4,
+            "DesiredCapacity": 0,
+            "DefaultCooldown": 300,
+            "AvailabilityZones": [
+                "us-east-1a",
+                "us-east-1b"
+            ],
+            "AvailabilityZoneIds": [
+                "use1-az4",
+                "use1-az6"
+            ],
+            "LoadBalancerNames": [],
+            "TargetGroupARNs": [
+                "arn:aws:elasticloadbalancing:us-east-1:428101261622:targetgroup/w1-app-tg/6c8d37ed52d2697f"
+            ],
+            "HealthCheckType": "EC2",
+            "HealthCheckGracePeriod": 0,
+            "Instances": [],
+            "CreatedTime": "2026-11-16T12:20:44.706000+00:00",
+            "SuspendedProcesses": [],
+            "VPCZoneIdentifier": "subnet-00a122ab6e0dd98b6,subnet-0d1c54470bab5f591",
+            "EnabledMetrics": [],
+            "Tags": [],
+            "TerminationPolicies": [
+                "Default"
+            ],
+            "NewInstancesProtectedFromScaleIn": false,
+            "ServiceLinkedRoleARN": "arn:aws:iam::428101261622:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling",
+            "TrafficSources": [
+                {
+                    "Identifier": "arn:aws:elasticloadbalancing:us-east-1:428101261622:targetgroup/w1-app-tg/6c8d37ed52d2697f",
+                    "Type": "elbv2"
+                }
+            ],
+            "AvailabilityZoneDistribution": {
+                "CapacityDistributionStrategy": "balanced-best-effort"
+            },
+            "CapacityReservationSpecification": {
+                "CapacityReservationPreference": "default"
+            },
+            "InstanceLifecyclePolicy": {
+                "RetentionTriggers": {
+                    "TerminateHookAbandon": "terminate"
+                }
+            }
+        }
+    ]
+}
