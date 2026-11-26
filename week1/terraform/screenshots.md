@@ -22,3 +22,7 @@ the security setting, the test result, and the budget view.
    the apply-complete terminal capture in the same folder).
 7. `day6-07-budget.png` - AWS Budgets, monthly-guard, current vs
    budgeted after Day 6, with the NAT gateway billing again.
+
+## Capture record, 2026-11-26
+
+Captured 2026-11-26 in landscape (1069 x 769, account ID masked) during a one-session rebuild: items 1, 2, 3, 4, 5, and 7. Item 6 (terminal plan capture) has no PNG; the plan was verified live in the session (39 to add, 0 to change, 0 to destroy) and the apply and destroy outputs are saved in this folder as apply-output-recapture.txt and destroy-output-recapture.txt. The stack was destroyed again the same session and verified at state 0.

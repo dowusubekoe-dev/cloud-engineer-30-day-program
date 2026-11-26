@@ -13,3 +13,7 @@ Standing pattern for every day (applies Days 1-30): (1) the resource exists, lis
 7. `07-iam-dashboard.png` — IAM → Dashboard: the security status panel (root user MFA and recommendations).
 
 Note: the permission boundary and SCP from Day 1 are JSON templates in this folder, not live console objects; the JSON files themselves are their proof. Do not stage console shots for resources that do not exist.
+
+## Recapture note, 2026-11-26
+
+Items 1, 4, 5, and 7 were replaced on 2026-11-26 with landscape captures (1069 x 769, account ID masked) taken while the Week 1 stack was rebuilt for one session. The portrait originals are backed up outside this folder tree (week1-portrait-backup-2026-11-26). Item 2 was recaptured in landscape on 2026-11-21. Item 6 was NOT replaced: no CloudTrail trail exists in the account anymore, so a new capture would show an empty list and misstate Day 1; the original portrait stays. Item 3 (policy simulator) has still never been captured.

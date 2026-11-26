@@ -1,0 +1,1234 @@
+Acquiring state lock. This may take a few moments...
+module.network.aws_vpc.w1: Refreshing state... [id=vpc-0f7c3765b59767bd9]
+module.network.aws_eip.nat: Refreshing state... [id=eipalloc-0b440b8a4e01697c8]
+module.network.aws_security_group.app: Refreshing state... [id=sg-06bec1064cd88d9fd]
+module.network.aws_subnet.data[1]: Refreshing state... [id=subnet-0e1fddbbd5a6c3a74]
+module.compute.aws_lb_target_group.app: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:428101261622:targetgroup/w1-app-tg/1b7fc8c8a40ebaa1]
+module.network.aws_subnet.data[0]: Refreshing state... [id=subnet-0d3075557e52b8134]
+module.network.aws_internet_gateway.w1: Refreshing state... [id=igw-0fda2b360b44aa93c]
+module.network.aws_subnet.app[0]: Refreshing state... [id=subnet-0b88319d5fd0f048a]
+module.network.aws_subnet.public[0]: Refreshing state... [id=subnet-07f25b7d23a88013d]
+module.network.aws_security_group.data: Refreshing state... [id=sg-0067ff5abbb48e211]
+module.network.aws_subnet.public[1]: Refreshing state... [id=subnet-02d5e27c0a686ccc3]
+module.network.aws_subnet.app[1]: Refreshing state... [id=subnet-094b112efcb91a6d4]
+module.network.aws_security_group.public: Refreshing state... [id=sg-017ed318483237a06]
+module.network.aws_vpc_security_group_egress_rule.app_all: Refreshing state... [id=sgr-06f67c046ffdaa214]
+module.network.aws_route_table.public: Refreshing state... [id=rtb-0452f855c9e755b45]
+module.compute.aws_launch_template.app: Refreshing state... [id=lt-070eca396ad865cbc]
+module.data.aws_db_subnet_group.w1: Refreshing state... [id=w1-data-subnet-group]
+module.network.aws_vpc_security_group_ingress_rule.data_mysql: Refreshing state... [id=sgr-0239b6b6bc6084057]
+module.network.aws_vpc_security_group_egress_rule.data_all: Refreshing state... [id=sgr-001469cd9776a303b]
+module.network.aws_vpc_security_group_ingress_rule.data_postgres: Refreshing state... [id=sgr-04329ba01ed8bdb70]
+module.network.aws_vpc_security_group_ingress_rule.app_https: Refreshing state... [id=sgr-0c0ac01e45ded3afa]
+module.network.aws_vpc_security_group_ingress_rule.app_http: Refreshing state... [id=sgr-0b48fd75e05753e61]
+module.network.aws_vpc_security_group_egress_rule.public_all: Refreshing state... [id=sgr-064677150fba6c433]
+module.network.aws_vpc_security_group_ingress_rule.public_http: Refreshing state... [id=sgr-0fa50841add778fa4]
+module.network.aws_vpc_security_group_ingress_rule.public_https: Refreshing state... [id=sgr-0634b919359f1ec7b]
+module.network.aws_nat_gateway.w1: Refreshing state... [id=nat-0d1a40ec583074d26]
+module.network.aws_route_table_association.public[1]: Refreshing state... [id=rtbassoc-0e096fce835a30a07]
+module.network.aws_route_table_association.public[0]: Refreshing state... [id=rtbassoc-07b062f1d0025c6fd]
+module.compute.aws_autoscaling_group.app: Refreshing state... [id=app-asg]
+module.compute.aws_lb.w1: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:428101261622:loadbalancer/app/w1-alb/8440594ae288af4a]
+module.network.aws_route_table.app: Refreshing state... [id=rtb-01212f89b5ebb9608]
+module.network.aws_route_table.data: Refreshing state... [id=rtb-0fe7317d24bc2cee7]
+module.network.aws_route_table_association.data[0]: Refreshing state... [id=rtbassoc-0d37469226585b75a]
+module.network.aws_route_table_association.app[1]: Refreshing state... [id=rtbassoc-012248013197011df]
+module.network.aws_route_table_association.app[0]: Refreshing state... [id=rtbassoc-07e7d2372bbe23a10]
+module.network.aws_route_table_association.data[1]: Refreshing state... [id=rtbassoc-0817192819bda0479]
+module.network.aws_vpc_endpoint.s3: Refreshing state... [id=vpce-067e644cdf57766e0]
+module.data.aws_db_instance.app: Refreshing state... [id=db-7QPDADQYOJTGML2FDWCJM246HM]
+module.compute.aws_lb_listener.http: Refreshing state... [id=arn:aws:elasticloadbalancing:us-east-1:428101261622:listener/app/w1-alb/8440594ae288af4a/c551409e19c4496f]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # module.compute.aws_autoscaling_group.app will be destroyed
+  - resource "aws_autoscaling_group" "app" {
+      - arn                              = "arn:aws:autoscaling:us-east-1:428101261622:autoScalingGroup:66e0e480-d6a7-44c6-a1ba-d9bb26eb2b30:autoScalingGroupName/app-asg" -> null
+      - availability_zones               = [
+          - "us-east-1a",
+          - "us-east-1b",
+        ] -> null
+      - capacity_rebalance               = false -> null
+      - default_cooldown                 = 300 -> null
+      - default_instance_warmup          = 0 -> null
+      - desired_capacity                 = 2 -> null
+      - enabled_metrics                  = [] -> null
+      - force_delete                     = false -> null
+      - force_delete_warm_pool           = false -> null
+      - health_check_grace_period        = 300 -> null
+      - health_check_type                = "EC2" -> null
+      - id                               = "app-asg" -> null
+      - ignore_failed_scaling_activities = false -> null
+      - load_balancers                   = [] -> null
+      - max_instance_lifetime            = 0 -> null
+      - max_size                         = 4 -> null
+      - metrics_granularity              = "1Minute" -> null
+      - min_size                         = 2 -> null
+      - name                             = "app-asg" -> null
+      - predicted_capacity               = 0 -> null
+      - protect_from_scale_in            = false -> null
+      - service_linked_role_arn          = "arn:aws:iam::428101261622:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling" -> null
+      - suspended_processes              = [] -> null
+      - target_group_arns                = [
+          - "arn:aws:elasticloadbalancing:us-east-1:428101261622:targetgroup/w1-app-tg/1b7fc8c8a40ebaa1",
+        ] -> null
+      - termination_policies             = [] -> null
+      - vpc_zone_identifier              = [
+          - "subnet-094b112efcb91a6d4",
+          - "subnet-0b88319d5fd0f048a",
+        ] -> null
+      - wait_for_capacity_timeout        = "10m" -> null
+      - warm_pool_size                   = 0 -> null
+
+      - availability_zone_distribution {
+          - capacity_distribution_strategy = "balanced-best-effort" -> null
+        }
+
+      - capacity_reservation_specification {
+          - capacity_reservation_preference = "default" -> null
+        }
+
+      - launch_template {
+          - id      = "lt-070eca396ad865cbc" -> null
+          - name    = "app-lt" -> null
+          - version = "$Latest" -> null
+        }
+
+      - traffic_source {
+          - identifier = "arn:aws:elasticloadbalancing:us-east-1:428101261622:targetgroup/w1-app-tg/1b7fc8c8a40ebaa1" -> null
+          - type       = "elbv2" -> null
+        }
+    }
+
+  # module.compute.aws_launch_template.app will be destroyed
+  - resource "aws_launch_template" "app" {
+      - arn                     = "arn:aws:ec2:us-east-1:428101261622:launch-template/lt-070eca396ad865cbc" -> null
+      - default_version         = 1 -> null
+      - disable_api_stop        = false -> null
+      - disable_api_termination = false -> null
+      - id                      = "lt-070eca396ad865cbc" -> null
+      - image_id                = "ami-096ef200a877f36af" -> null
+      - instance_type           = "t3.micro" -> null
+      - latest_version          = 1 -> null
+      - name                    = "app-lt" -> null
+      - security_group_names    = [] -> null
+      - tags                    = {} -> null
+      - tags_all                = {} -> null
+      - user_data               = "IyEvYmluL2Jhc2gKZG5mIGluc3RhbGwgLXkgaHR0cGQKZWNobyAiaGVsbG8gZnJvbSAkKGhvc3RuYW1lKSAtIHcxIGFwcCB0aWVyIiA+IC92YXIvd3d3L2h0bWwvaW5kZXguaHRtbApzeXN0ZW1jdGwgZW5hYmxlIC0tbm93IGh0dHBkCg==" -> null
+      - vpc_security_group_ids  = [
+          - "sg-06bec1064cd88d9fd",
+        ] -> null
+
+      - metadata_options {
+          - http_endpoint               = "enabled" -> null
+          - http_put_response_hop_limit = 0 -> null
+          - http_tokens                 = "required" -> null
+        }
+
+      - tag_specifications {
+          - resource_type = "instance" -> null
+          - tags          = {
+              - "Name" = "w1-app"
+            } -> null
+        }
+    }
+
+  # module.compute.aws_lb.w1 will be destroyed
+  - resource "aws_lb" "w1" {
+      - arn                                         = "arn:aws:elasticloadbalancing:us-east-1:428101261622:loadbalancer/app/w1-alb/8440594ae288af4a" -> null
+      - arn_suffix                                  = "app/w1-alb/8440594ae288af4a" -> null
+      - client_keep_alive                           = 3600 -> null
+      - desync_mitigation_mode                      = "defensive" -> null
+      - dns_name                                    = "w1-alb-1819421716.us-east-1.elb.amazonaws.com" -> null
+      - drop_invalid_header_fields                  = false -> null
+      - enable_cross_zone_load_balancing            = true -> null
+      - enable_deletion_protection                  = false -> null
+      - enable_http2                                = true -> null
+      - enable_tls_version_and_cipher_suite_headers = false -> null
+      - enable_waf_fail_open                        = false -> null
+      - enable_xff_client_port                      = false -> null
+      - enable_zonal_shift                          = false -> null
+      - id                                          = "arn:aws:elasticloadbalancing:us-east-1:428101261622:loadbalancer/app/w1-alb/8440594ae288af4a" -> null
+      - idle_timeout                                = 60 -> null
+      - internal                                    = false -> null
+      - ip_address_type                             = "ipv4" -> null
+      - load_balancer_type                          = "application" -> null
+      - name                                        = "w1-alb" -> null
+      - preserve_host_header                        = false -> null
+      - security_groups                             = [
+          - "sg-017ed318483237a06",
+        ] -> null
+      - subnets                                     = [
+          - "subnet-02d5e27c0a686ccc3",
+          - "subnet-07f25b7d23a88013d",
+        ] -> null
+      - tags                                        = {
+          - "Name" = "w1-alb"
+        } -> null
+      - tags_all                                    = {
+          - "Name" = "w1-alb"
+        } -> null
+      - vpc_id                                      = "vpc-0f7c3765b59767bd9" -> null
+      - xff_header_processing_mode                  = "append" -> null
+      - zone_id                                     = "Z35SXDOTRQ7X7K" -> null
+
+      - access_logs {
+          - enabled = false -> null
+        }
+
+      - connection_logs {
+          - enabled = false -> null
+        }
+
+      - subnet_mapping {
+          - subnet_id = "subnet-02d5e27c0a686ccc3" -> null
+        }
+      - subnet_mapping {
+          - subnet_id = "subnet-07f25b7d23a88013d" -> null
+        }
+    }
+
+  # module.compute.aws_lb_listener.http will be destroyed
+  - resource "aws_lb_listener" "http" {
+      - arn                                  = "arn:aws:elasticloadbalancing:us-east-1:428101261622:listener/app/w1-alb/8440594ae288af4a/c551409e19c4496f" -> null
+      - id                                   = "arn:aws:elasticloadbalancing:us-east-1:428101261622:listener/app/w1-alb/8440594ae288af4a/c551409e19c4496f" -> null
+      - load_balancer_arn                    = "arn:aws:elasticloadbalancing:us-east-1:428101261622:loadbalancer/app/w1-alb/8440594ae288af4a" -> null
+      - port                                 = 80 -> null
+      - protocol                             = "HTTP" -> null
+      - routing_http_response_server_enabled = true -> null
+      - tags                                 = {} -> null
+      - tags_all                             = {} -> null
+
+      - default_action {
+          - order            = 1 -> null
+          - target_group_arn = "arn:aws:elasticloadbalancing:us-east-1:428101261622:targetgroup/w1-app-tg/1b7fc8c8a40ebaa1" -> null
+          - type             = "forward" -> null
+        }
+    }
+
+  # module.compute.aws_lb_target_group.app will be destroyed
+  - resource "aws_lb_target_group" "app" {
+      - arn                                = "arn:aws:elasticloadbalancing:us-east-1:428101261622:targetgroup/w1-app-tg/1b7fc8c8a40ebaa1" -> null
+      - arn_suffix                         = "targetgroup/w1-app-tg/1b7fc8c8a40ebaa1" -> null
+      - deregistration_delay               = "300" -> null
+      - id                                 = "arn:aws:elasticloadbalancing:us-east-1:428101261622:targetgroup/w1-app-tg/1b7fc8c8a40ebaa1" -> null
+      - ip_address_type                    = "ipv4" -> null
+      - lambda_multi_value_headers_enabled = false -> null
+      - load_balancer_arns                 = [
+          - "arn:aws:elasticloadbalancing:us-east-1:428101261622:loadbalancer/app/w1-alb/8440594ae288af4a",
+        ] -> null
+      - load_balancing_algorithm_type      = "round_robin" -> null
+      - load_balancing_anomaly_mitigation  = "off" -> null
+      - load_balancing_cross_zone_enabled  = "use_load_balancer_configuration" -> null
+      - name                               = "w1-app-tg" -> null
+      - port                               = 80 -> null
+      - protocol                           = "HTTP" -> null
+      - protocol_version                   = "HTTP1" -> null
+      - proxy_protocol_v2                  = false -> null
+      - slow_start                         = 0 -> null
+      - tags                               = {
+          - "Name" = "w1-app-tg"
+        } -> null
+      - tags_all                           = {
+          - "Name" = "w1-app-tg"
+        } -> null
+      - target_type                        = "instance" -> null
+      - vpc_id                             = "vpc-0f7c3765b59767bd9" -> null
+
+      - health_check {
+          - enabled             = true -> null
+          - healthy_threshold   = 5 -> null
+          - interval            = 30 -> null
+          - matcher             = "200" -> null
+          - path                = "/" -> null
+          - port                = "traffic-port" -> null
+          - protocol            = "HTTP" -> null
+          - timeout             = 5 -> null
+          - unhealthy_threshold = 2 -> null
+        }
+
+      - stickiness {
+          - cookie_duration = 86400 -> null
+          - enabled         = false -> null
+          - type            = "lb_cookie" -> null
+        }
+
+      - target_failover {}
+
+      - target_group_health {
+          - dns_failover {
+              - minimum_healthy_targets_count      = "1" -> null
+              - minimum_healthy_targets_percentage = "off" -> null
+            }
+          - unhealthy_state_routing {
+              - minimum_healthy_targets_count      = 1 -> null
+              - minimum_healthy_targets_percentage = "off" -> null
+            }
+        }
+
+      - target_health_state {}
+    }
+
+  # module.data.aws_db_instance.app will be destroyed
+  - resource "aws_db_instance" "app" {
+      - address                               = "app-db.co16s6q6g4t2.us-east-1.rds.amazonaws.com" -> null
+      - allocated_storage                     = 20 -> null
+      - apply_immediately                     = false -> null
+      - arn                                   = "arn:aws:rds:us-east-1:428101261622:db:app-db" -> null
+      - auto_minor_version_upgrade            = true -> null
+      - availability_zone                     = "us-east-1b" -> null
+      - backup_retention_period               = 7 -> null
+      - backup_target                         = "region" -> null
+      - backup_window                         = "04:45-05:15" -> null
+      - ca_cert_identifier                    = "rds-ca-rsa2048-g1" -> null
+      - copy_tags_to_snapshot                 = false -> null
+      - customer_owned_ip_enabled             = false -> null
+      - database_insights_mode                = "standard" -> null
+      - db_subnet_group_name                  = "w1-data-subnet-group" -> null
+      - dedicated_log_volume                  = false -> null
+      - delete_automated_backups              = true -> null
+      - deletion_protection                   = false -> null
+      - domain_dns_ips                        = [] -> null
+      - enabled_cloudwatch_logs_exports       = [] -> null
+      - endpoint                              = "app-db.co16s6q6g4t2.us-east-1.rds.amazonaws.com:5432" -> null
+      - engine                                = "postgres" -> null
+      - engine_lifecycle_support              = "open-source-rds-extended-support" -> null
+      - engine_version                        = "15.19" -> null
+      - engine_version_actual                 = "15.19" -> null
+      - hosted_zone_id                        = "Z2R2ITUGPM61AM" -> null
+      - iam_database_authentication_enabled   = false -> null
+      - id                                    = "db-7QPDADQYOJTGML2FDWCJM246HM" -> null
+      - identifier                            = "app-db" -> null
+      - instance_class                        = "db.t3.micro" -> null
+      - iops                                  = 0 -> null
+      - kms_key_id                            = "arn:aws:kms:us-east-1:428101261622:key/38695e2e-8f35-4d9e-9564-0aaf84d136f7" -> null
+      - latest_restorable_time                = "2026-11-26T09:54:01Z" -> null
+      - license_model                         = "postgresql-license" -> null
+      - listener_endpoint                     = [] -> null
+      - maintenance_window                    = "fri:03:20-fri:03:50" -> null
+      - master_user_secret                    = [] -> null
+      - max_allocated_storage                 = 0 -> null
+      - monitoring_interval                   = 0 -> null
+      - multi_az                              = false -> null
+      - network_type                          = "IPV4" -> null
+      - option_group_name                     = "default:postgres-15" -> null
+      - parameter_group_name                  = "default.postgres15" -> null
+      - performance_insights_enabled          = false -> null
+      - performance_insights_retention_period = 0 -> null
+      - port                                  = 5432 -> null
+      - publicly_accessible                   = false -> null
+      - replicas                              = [] -> null
+      - resource_id                           = "db-7QPDADQYOJTGML2FDWCJM246HM" -> null
+      - skip_final_snapshot                   = true -> null
+      - snapshot_identifier                   = "app-db-manual-1" -> null
+      - status                                = "available" -> null
+      - storage_encrypted                     = true -> null
+      - storage_throughput                    = 0 -> null
+      - storage_type                          = "gp2" -> null
+      - tags                                  = {
+          - "Name" = "app-db"
+        } -> null
+      - tags_all                              = {
+          - "Name" = "app-db"
+        } -> null
+      - username                              = "appadmin" -> null
+      - vpc_security_group_ids                = [
+          - "sg-0067ff5abbb48e211",
+        ] -> null
+    }
+
+  # module.data.aws_db_subnet_group.w1 will be destroyed
+  - resource "aws_db_subnet_group" "w1" {
+      - arn                     = "arn:aws:rds:us-east-1:428101261622:subgrp:w1-data-subnet-group" -> null
+      - description             = "Managed by Terraform" -> null
+      - id                      = "w1-data-subnet-group" -> null
+      - name                    = "w1-data-subnet-group" -> null
+      - subnet_ids              = [
+          - "subnet-0d3075557e52b8134",
+          - "subnet-0e1fddbbd5a6c3a74",
+        ] -> null
+      - supported_network_types = [
+          - "IPV4",
+        ] -> null
+      - tags                    = {
+          - "Name" = "w1-data-subnet-group"
+        } -> null
+      - tags_all                = {
+          - "Name" = "w1-data-subnet-group"
+        } -> null
+      - vpc_id                  = "vpc-0f7c3765b59767bd9" -> null
+    }
+
+  # module.network.aws_eip.nat will be destroyed
+  - resource "aws_eip" "nat" {
+      - allocation_id        = "eipalloc-0b440b8a4e01697c8" -> null
+      - arn                  = "arn:aws:ec2:us-east-1:428101261622:elastic-ip/eipalloc-0b440b8a4e01697c8" -> null
+      - association_id       = "eipassoc-009690949356543c5" -> null
+      - domain               = "vpc" -> null
+      - id                   = "eipalloc-0b440b8a4e01697c8" -> null
+      - network_border_group = "us-east-1" -> null
+      - network_interface    = "eni-0a2abb0d2479ce7be" -> null
+      - private_dns          = "ip-10-20-1-214.ec2.internal" -> null
+      - private_ip           = "10.20.1.214" -> null
+      - public_dns           = "ec2-100-50-232-236.compute-1.amazonaws.com" -> null
+      - public_ip            = "100.50.232.236" -> null
+      - public_ipv4_pool     = "amazon" -> null
+      - tags                 = {
+          - "Name" = "w1-nat-eip"
+        } -> null
+      - tags_all             = {
+          - "Name" = "w1-nat-eip"
+        } -> null
+      - vpc                  = true -> null
+    }
+
+  # module.network.aws_internet_gateway.w1 will be destroyed
+  - resource "aws_internet_gateway" "w1" {
+      - arn      = "arn:aws:ec2:us-east-1:428101261622:internet-gateway/igw-0fda2b360b44aa93c" -> null
+      - id       = "igw-0fda2b360b44aa93c" -> null
+      - owner_id = "428101261622" -> null
+      - tags     = {
+          - "Name" = "w1-igw"
+        } -> null
+      - tags_all = {
+          - "Name" = "w1-igw"
+        } -> null
+      - vpc_id   = "vpc-0f7c3765b59767bd9" -> null
+    }
+
+  # module.network.aws_nat_gateway.w1 will be destroyed
+  - resource "aws_nat_gateway" "w1" {
+      - allocation_id                      = "eipalloc-0b440b8a4e01697c8" -> null
+      - association_id                     = "eipassoc-009690949356543c5" -> null
+      - connectivity_type                  = "public" -> null
+      - id                                 = "nat-0d1a40ec583074d26" -> null
+      - network_interface_id               = "eni-0a2abb0d2479ce7be" -> null
+      - private_ip                         = "10.20.1.214" -> null
+      - public_ip                          = "100.50.232.236" -> null
+      - secondary_allocation_ids           = [] -> null
+      - secondary_private_ip_address_count = 0 -> null
+      - secondary_private_ip_addresses     = [] -> null
+      - subnet_id                          = "subnet-07f25b7d23a88013d" -> null
+      - tags                               = {
+          - "Name" = "w1-nat"
+        } -> null
+      - tags_all                           = {
+          - "Name" = "w1-nat"
+        } -> null
+    }
+
+  # module.network.aws_route_table.app will be destroyed
+  - resource "aws_route_table" "app" {
+      - arn              = "arn:aws:ec2:us-east-1:428101261622:route-table/rtb-01212f89b5ebb9608" -> null
+      - id               = "rtb-01212f89b5ebb9608" -> null
+      - owner_id         = "428101261622" -> null
+      - propagating_vgws = [] -> null
+      - route            = [
+          - {
+              - carrier_gateway_id         = ""
+              - cidr_block                 = "0.0.0.0/0"
+              - core_network_arn           = ""
+              - destination_prefix_list_id = ""
+              - egress_only_gateway_id     = ""
+              - gateway_id                 = ""
+              - ipv6_cidr_block            = ""
+              - local_gateway_id           = ""
+              - nat_gateway_id             = "nat-0d1a40ec583074d26"
+              - network_interface_id       = ""
+              - transit_gateway_id         = ""
+              - vpc_endpoint_id            = ""
+              - vpc_peering_connection_id  = ""
+            },
+        ] -> null
+      - tags             = {
+          - "Name" = "w1-app-rt"
+        } -> null
+      - tags_all         = {
+          - "Name" = "w1-app-rt"
+        } -> null
+      - vpc_id           = "vpc-0f7c3765b59767bd9" -> null
+    }
+
+  # module.network.aws_route_table.data will be destroyed
+  - resource "aws_route_table" "data" {
+      - arn              = "arn:aws:ec2:us-east-1:428101261622:route-table/rtb-0fe7317d24bc2cee7" -> null
+      - id               = "rtb-0fe7317d24bc2cee7" -> null
+      - owner_id         = "428101261622" -> null
+      - propagating_vgws = [] -> null
+      - route            = [
+          - {
+              - carrier_gateway_id         = ""
+              - cidr_block                 = "0.0.0.0/0"
+              - core_network_arn           = ""
+              - destination_prefix_list_id = ""
+              - egress_only_gateway_id     = ""
+              - gateway_id                 = ""
+              - ipv6_cidr_block            = ""
+              - local_gateway_id           = ""
+              - nat_gateway_id             = "nat-0d1a40ec583074d26"
+              - network_interface_id       = ""
+              - transit_gateway_id         = ""
+              - vpc_endpoint_id            = ""
+              - vpc_peering_connection_id  = ""
+            },
+        ] -> null
+      - tags             = {
+          - "Name" = "w1-data-rt"
+        } -> null
+      - tags_all         = {
+          - "Name" = "w1-data-rt"
+        } -> null
+      - vpc_id           = "vpc-0f7c3765b59767bd9" -> null
+    }
+
+  # module.network.aws_route_table.public will be destroyed
+  - resource "aws_route_table" "public" {
+      - arn              = "arn:aws:ec2:us-east-1:428101261622:route-table/rtb-0452f855c9e755b45" -> null
+      - id               = "rtb-0452f855c9e755b45" -> null
+      - owner_id         = "428101261622" -> null
+      - propagating_vgws = [] -> null
+      - route            = [
+          - {
+              - carrier_gateway_id         = ""
+              - cidr_block                 = "0.0.0.0/0"
+              - core_network_arn           = ""
+              - destination_prefix_list_id = ""
+              - egress_only_gateway_id     = ""
+              - gateway_id                 = "igw-0fda2b360b44aa93c"
+              - ipv6_cidr_block            = ""
+              - local_gateway_id           = ""
+              - nat_gateway_id             = ""
+              - network_interface_id       = ""
+              - transit_gateway_id         = ""
+              - vpc_endpoint_id            = ""
+              - vpc_peering_connection_id  = ""
+            },
+        ] -> null
+      - tags             = {
+          - "Name" = "w1-public-rt"
+        } -> null
+      - tags_all         = {
+          - "Name" = "w1-public-rt"
+        } -> null
+      - vpc_id           = "vpc-0f7c3765b59767bd9" -> null
+    }
+
+  # module.network.aws_route_table_association.app[0] will be destroyed
+  - resource "aws_route_table_association" "app" {
+      - id             = "rtbassoc-07e7d2372bbe23a10" -> null
+      - route_table_id = "rtb-01212f89b5ebb9608" -> null
+      - subnet_id      = "subnet-0b88319d5fd0f048a" -> null
+    }
+
+  # module.network.aws_route_table_association.app[1] will be destroyed
+  - resource "aws_route_table_association" "app" {
+      - id             = "rtbassoc-012248013197011df" -> null
+      - route_table_id = "rtb-01212f89b5ebb9608" -> null
+      - subnet_id      = "subnet-094b112efcb91a6d4" -> null
+    }
+
+  # module.network.aws_route_table_association.data[0] will be destroyed
+  - resource "aws_route_table_association" "data" {
+      - id             = "rtbassoc-0d37469226585b75a" -> null
+      - route_table_id = "rtb-0fe7317d24bc2cee7" -> null
+      - subnet_id      = "subnet-0d3075557e52b8134" -> null
+    }
+
+  # module.network.aws_route_table_association.data[1] will be destroyed
+  - resource "aws_route_table_association" "data" {
+      - id             = "rtbassoc-0817192819bda0479" -> null
+      - route_table_id = "rtb-0fe7317d24bc2cee7" -> null
+      - subnet_id      = "subnet-0e1fddbbd5a6c3a74" -> null
+    }
+
+  # module.network.aws_route_table_association.public[0] will be destroyed
+  - resource "aws_route_table_association" "public" {
+      - id             = "rtbassoc-07b062f1d0025c6fd" -> null
+      - route_table_id = "rtb-0452f855c9e755b45" -> null
+      - subnet_id      = "subnet-07f25b7d23a88013d" -> null
+    }
+
+  # module.network.aws_route_table_association.public[1] will be destroyed
+  - resource "aws_route_table_association" "public" {
+      - id             = "rtbassoc-0e096fce835a30a07" -> null
+      - route_table_id = "rtb-0452f855c9e755b45" -> null
+      - subnet_id      = "subnet-02d5e27c0a686ccc3" -> null
+    }
+
+  # module.network.aws_security_group.app will be destroyed
+  - resource "aws_security_group" "app" {
+      - arn                    = "arn:aws:ec2:us-east-1:428101261622:security-group/sg-06bec1064cd88d9fd" -> null
+      - description            = "App tier: HTTPS only from the public tier" -> null
+      - egress                 = [
+          - {
+              - cidr_blocks      = [
+                  - "0.0.0.0/0",
+                ]
+              - description      = ""
+              - from_port        = 0
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "-1"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 0
+            },
+        ] -> null
+      - id                     = "sg-06bec1064cd88d9fd" -> null
+      - ingress                = [
+          - {
+              - cidr_blocks      = []
+              - description      = "HTTP from the public tier (ALB)"
+              - from_port        = 80
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = [
+                  - "sg-017ed318483237a06",
+                ]
+              - self             = false
+              - to_port          = 80
+            },
+          - {
+              - cidr_blocks      = []
+              - description      = "HTTPS from the public tier (ALB)"
+              - from_port        = 443
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = [
+                  - "sg-017ed318483237a06",
+                ]
+              - self             = false
+              - to_port          = 443
+            },
+        ] -> null
+      - name                   = "w1-app-sg" -> null
+      - owner_id               = "428101261622" -> null
+      - revoke_rules_on_delete = false -> null
+      - tags                   = {
+          - "Name" = "w1-app-sg"
+        } -> null
+      - tags_all               = {
+          - "Name" = "w1-app-sg"
+        } -> null
+      - vpc_id                 = "vpc-0f7c3765b59767bd9" -> null
+    }
+
+  # module.network.aws_security_group.data will be destroyed
+  - resource "aws_security_group" "data" {
+      - arn                    = "arn:aws:ec2:us-east-1:428101261622:security-group/sg-0067ff5abbb48e211" -> null
+      - description            = "Data tier: Postgres/MySQL only from the app tier" -> null
+      - egress                 = [
+          - {
+              - cidr_blocks      = [
+                  - "0.0.0.0/0",
+                ]
+              - description      = ""
+              - from_port        = 0
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "-1"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 0
+            },
+        ] -> null
+      - id                     = "sg-0067ff5abbb48e211" -> null
+      - ingress                = [
+          - {
+              - cidr_blocks      = []
+              - description      = "MySQL from the app tier"
+              - from_port        = 3306
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = [
+                  - "sg-06bec1064cd88d9fd",
+                ]
+              - self             = false
+              - to_port          = 3306
+            },
+          - {
+              - cidr_blocks      = []
+              - description      = "PostgreSQL from the app tier"
+              - from_port        = 5432
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = [
+                  - "sg-06bec1064cd88d9fd",
+                ]
+              - self             = false
+              - to_port          = 5432
+            },
+        ] -> null
+      - name                   = "w1-data-sg" -> null
+      - owner_id               = "428101261622" -> null
+      - revoke_rules_on_delete = false -> null
+      - tags                   = {
+          - "Name" = "w1-data-sg"
+        } -> null
+      - tags_all               = {
+          - "Name" = "w1-data-sg"
+        } -> null
+      - vpc_id                 = "vpc-0f7c3765b59767bd9" -> null
+    }
+
+  # module.network.aws_security_group.public will be destroyed
+  - resource "aws_security_group" "public" {
+      - arn                    = "arn:aws:ec2:us-east-1:428101261622:security-group/sg-017ed318483237a06" -> null
+      - description            = "Public tier: HTTPS from the internet" -> null
+      - egress                 = [
+          - {
+              - cidr_blocks      = [
+                  - "0.0.0.0/0",
+                ]
+              - description      = ""
+              - from_port        = 0
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "-1"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 0
+            },
+        ] -> null
+      - id                     = "sg-017ed318483237a06" -> null
+      - ingress                = [
+          - {
+              - cidr_blocks      = [
+                  - "0.0.0.0/0",
+                ]
+              - description      = "HTTP from the internet"
+              - from_port        = 80
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 80
+            },
+          - {
+              - cidr_blocks      = [
+                  - "0.0.0.0/0",
+                ]
+              - description      = "HTTPS from the internet"
+              - from_port        = 443
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 443
+            },
+        ] -> null
+      - name                   = "w1-public-sg" -> null
+      - owner_id               = "428101261622" -> null
+      - revoke_rules_on_delete = false -> null
+      - tags                   = {
+          - "Name" = "w1-public-sg"
+        } -> null
+      - tags_all               = {
+          - "Name" = "w1-public-sg"
+        } -> null
+      - vpc_id                 = "vpc-0f7c3765b59767bd9" -> null
+    }
+
+  # module.network.aws_subnet.app[0] will be destroyed
+  - resource "aws_subnet" "app" {
+      - arn                                            = "arn:aws:ec2:us-east-1:428101261622:subnet/subnet-0b88319d5fd0f048a" -> null
+      - assign_ipv6_address_on_creation                = false -> null
+      - availability_zone                              = "us-east-1a" -> null
+      - availability_zone_id                           = "use1-az4" -> null
+      - cidr_block                                     = "10.20.11.0/24" -> null
+      - enable_dns64                                   = false -> null
+      - enable_lni_at_device_index                     = 0 -> null
+      - enable_resource_name_dns_a_record_on_launch    = false -> null
+      - enable_resource_name_dns_aaaa_record_on_launch = false -> null
+      - id                                             = "subnet-0b88319d5fd0f048a" -> null
+      - ipv6_native                                    = false -> null
+      - map_customer_owned_ip_on_launch                = false -> null
+      - map_public_ip_on_launch                        = false -> null
+      - owner_id                                       = "428101261622" -> null
+      - private_dns_hostname_type_on_launch            = "ip-name" -> null
+      - tags                                           = {
+          - "Name" = "w1-app-a"
+        } -> null
+      - tags_all                                       = {
+          - "Name" = "w1-app-a"
+        } -> null
+      - vpc_id                                         = "vpc-0f7c3765b59767bd9" -> null
+    }
+
+  # module.network.aws_subnet.app[1] will be destroyed
+  - resource "aws_subnet" "app" {
+      - arn                                            = "arn:aws:ec2:us-east-1:428101261622:subnet/subnet-094b112efcb91a6d4" -> null
+      - assign_ipv6_address_on_creation                = false -> null
+      - availability_zone                              = "us-east-1b" -> null
+      - availability_zone_id                           = "use1-az6" -> null
+      - cidr_block                                     = "10.20.12.0/24" -> null
+      - enable_dns64                                   = false -> null
+      - enable_lni_at_device_index                     = 0 -> null
+      - enable_resource_name_dns_a_record_on_launch    = false -> null
+      - enable_resource_name_dns_aaaa_record_on_launch = false -> null
+      - id                                             = "subnet-094b112efcb91a6d4" -> null
+      - ipv6_native                                    = false -> null
+      - map_customer_owned_ip_on_launch                = false -> null
+      - map_public_ip_on_launch                        = false -> null
+      - owner_id                                       = "428101261622" -> null
+      - private_dns_hostname_type_on_launch            = "ip-name" -> null
+      - tags                                           = {
+          - "Name" = "w1-app-b"
+        } -> null
+      - tags_all                                       = {
+          - "Name" = "w1-app-b"
+        } -> null
+      - vpc_id                                         = "vpc-0f7c3765b59767bd9" -> null
+    }
+
+  # module.network.aws_subnet.data[0] will be destroyed
+  - resource "aws_subnet" "data" {
+      - arn                                            = "arn:aws:ec2:us-east-1:428101261622:subnet/subnet-0d3075557e52b8134" -> null
+      - assign_ipv6_address_on_creation                = false -> null
+      - availability_zone                              = "us-east-1a" -> null
+      - availability_zone_id                           = "use1-az4" -> null
+      - cidr_block                                     = "10.20.21.0/24" -> null
+      - enable_dns64                                   = false -> null
+      - enable_lni_at_device_index                     = 0 -> null
+      - enable_resource_name_dns_a_record_on_launch    = false -> null
+      - enable_resource_name_dns_aaaa_record_on_launch = false -> null
+      - id                                             = "subnet-0d3075557e52b8134" -> null
+      - ipv6_native                                    = false -> null
+      - map_customer_owned_ip_on_launch                = false -> null
+      - map_public_ip_on_launch                        = false -> null
+      - owner_id                                       = "428101261622" -> null
+      - private_dns_hostname_type_on_launch            = "ip-name" -> null
+      - tags                                           = {
+          - "Name" = "w1-data-a"
+        } -> null
+      - tags_all                                       = {
+          - "Name" = "w1-data-a"
+        } -> null
+      - vpc_id                                         = "vpc-0f7c3765b59767bd9" -> null
+    }
+
+  # module.network.aws_subnet.data[1] will be destroyed
+  - resource "aws_subnet" "data" {
+      - arn                                            = "arn:aws:ec2:us-east-1:428101261622:subnet/subnet-0e1fddbbd5a6c3a74" -> null
+      - assign_ipv6_address_on_creation                = false -> null
+      - availability_zone                              = "us-east-1b" -> null
+      - availability_zone_id                           = "use1-az6" -> null
+      - cidr_block                                     = "10.20.22.0/24" -> null
+      - enable_dns64                                   = false -> null
+      - enable_lni_at_device_index                     = 0 -> null
+      - enable_resource_name_dns_a_record_on_launch    = false -> null
+      - enable_resource_name_dns_aaaa_record_on_launch = false -> null
+      - id                                             = "subnet-0e1fddbbd5a6c3a74" -> null
+      - ipv6_native                                    = false -> null
+      - map_customer_owned_ip_on_launch                = false -> null
+      - map_public_ip_on_launch                        = false -> null
+      - owner_id                                       = "428101261622" -> null
+      - private_dns_hostname_type_on_launch            = "ip-name" -> null
+      - tags                                           = {
+          - "Name" = "w1-data-b"
+        } -> null
+      - tags_all                                       = {
+          - "Name" = "w1-data-b"
+        } -> null
+      - vpc_id                                         = "vpc-0f7c3765b59767bd9" -> null
+    }
+
+  # module.network.aws_subnet.public[0] will be destroyed
+  - resource "aws_subnet" "public" {
+      - arn                                            = "arn:aws:ec2:us-east-1:428101261622:subnet/subnet-07f25b7d23a88013d" -> null
+      - assign_ipv6_address_on_creation                = false -> null
+      - availability_zone                              = "us-east-1a" -> null
+      - availability_zone_id                           = "use1-az4" -> null
+      - cidr_block                                     = "10.20.1.0/24" -> null
+      - enable_dns64                                   = false -> null
+      - enable_lni_at_device_index                     = 0 -> null
+      - enable_resource_name_dns_a_record_on_launch    = false -> null
+      - enable_resource_name_dns_aaaa_record_on_launch = false -> null
+      - id                                             = "subnet-07f25b7d23a88013d" -> null
+      - ipv6_native                                    = false -> null
+      - map_customer_owned_ip_on_launch                = false -> null
+      - map_public_ip_on_launch                        = true -> null
+      - owner_id                                       = "428101261622" -> null
+      - private_dns_hostname_type_on_launch            = "ip-name" -> null
+      - tags                                           = {
+          - "Name" = "w1-public-a"
+        } -> null
+      - tags_all                                       = {
+          - "Name" = "w1-public-a"
+        } -> null
+      - vpc_id                                         = "vpc-0f7c3765b59767bd9" -> null
+    }
+
+  # module.network.aws_subnet.public[1] will be destroyed
+  - resource "aws_subnet" "public" {
+      - arn                                            = "arn:aws:ec2:us-east-1:428101261622:subnet/subnet-02d5e27c0a686ccc3" -> null
+      - assign_ipv6_address_on_creation                = false -> null
+      - availability_zone                              = "us-east-1b" -> null
+      - availability_zone_id                           = "use1-az6" -> null
+      - cidr_block                                     = "10.20.2.0/24" -> null
+      - enable_dns64                                   = false -> null
+      - enable_lni_at_device_index                     = 0 -> null
+      - enable_resource_name_dns_a_record_on_launch    = false -> null
+      - enable_resource_name_dns_aaaa_record_on_launch = false -> null
+      - id                                             = "subnet-02d5e27c0a686ccc3" -> null
+      - ipv6_native                                    = false -> null
+      - map_customer_owned_ip_on_launch                = false -> null
+      - map_public_ip_on_launch                        = true -> null
+      - owner_id                                       = "428101261622" -> null
+      - private_dns_hostname_type_on_launch            = "ip-name" -> null
+      - tags                                           = {
+          - "Name" = "w1-public-b"
+        } -> null
+      - tags_all                                       = {
+          - "Name" = "w1-public-b"
+        } -> null
+      - vpc_id                                         = "vpc-0f7c3765b59767bd9" -> null
+    }
+
+  # module.network.aws_vpc.w1 will be destroyed
+  - resource "aws_vpc" "w1" {
+      - arn                                  = "arn:aws:ec2:us-east-1:428101261622:vpc/vpc-0f7c3765b59767bd9" -> null
+      - assign_generated_ipv6_cidr_block     = false -> null
+      - cidr_block                           = "10.20.0.0/16" -> null
+      - default_network_acl_id               = "acl-0f830a8ae08737997" -> null
+      - default_route_table_id               = "rtb-0d3345abb3bd7b00e" -> null
+      - default_security_group_id            = "sg-07de2399bb9f6d5bf" -> null
+      - dhcp_options_id                      = "dopt-0db29b4ba91de514d" -> null
+      - enable_dns_hostnames                 = true -> null
+      - enable_dns_support                   = true -> null
+      - enable_network_address_usage_metrics = false -> null
+      - id                                   = "vpc-0f7c3765b59767bd9" -> null
+      - instance_tenancy                     = "default" -> null
+      - ipv6_netmask_length                  = 0 -> null
+      - main_route_table_id                  = "rtb-0d3345abb3bd7b00e" -> null
+      - owner_id                             = "428101261622" -> null
+      - tags                                 = {
+          - "Name" = "w1-vpc"
+        } -> null
+      - tags_all                             = {
+          - "Name" = "w1-vpc"
+        } -> null
+    }
+
+  # module.network.aws_vpc_endpoint.s3 will be destroyed
+  - resource "aws_vpc_endpoint" "s3" {
+      - arn                   = "arn:aws:ec2:us-east-1:428101261622:vpc-endpoint/vpce-067e644cdf57766e0" -> null
+      - cidr_blocks           = [
+          - "16.182.0.0/16",
+          - "54.231.0.0/16",
+          - "3.5.0.0/19",
+          - "52.216.0.0/15",
+          - "16.15.156.0/22",
+          - "16.15.96.0/20",
+          - "16.15.160.0/19",
+          - "18.34.0.0/19",
+          - "16.15.64.0/19",
+          - "3.2.103.0/24",
+          - "18.34.232.0/21",
+          - "16.15.192.0/18",
+          - "16.15.112.0/21",
+          - "16.15.120.0/22",
+        ] -> null
+      - dns_entry             = [] -> null
+      - id                    = "vpce-067e644cdf57766e0" -> null
+      - ip_address_type       = "ipv4" -> null
+      - network_interface_ids = [] -> null
+      - owner_id              = "428101261622" -> null
+      - policy                = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action    = "*"
+                      - Effect    = "Allow"
+                      - Principal = "*"
+                      - Resource  = "*"
+                    },
+                ]
+              - Version   = "2008-10-17"
+            }
+        ) -> null
+      - prefix_list_id        = "pl-63a5400a" -> null
+      - private_dns_enabled   = false -> null
+      - requester_managed     = false -> null
+      - route_table_ids       = [
+          - "rtb-01212f89b5ebb9608",
+          - "rtb-0fe7317d24bc2cee7",
+        ] -> null
+      - security_group_ids    = [] -> null
+      - service_name          = "com.amazonaws.us-east-1.s3" -> null
+      - service_region        = "us-east-1" -> null
+      - state                 = "available" -> null
+      - subnet_ids            = [] -> null
+      - tags                  = {
+          - "Name" = "w1-s3-endpoint"
+        } -> null
+      - tags_all              = {
+          - "Name" = "w1-s3-endpoint"
+        } -> null
+      - vpc_endpoint_type     = "Gateway" -> null
+      - vpc_id                = "vpc-0f7c3765b59767bd9" -> null
+
+      - dns_options {
+          - dns_record_ip_type                             = "service-defined" -> null
+          - private_dns_only_for_inbound_resolver_endpoint = false -> null
+        }
+    }
+
+  # module.network.aws_vpc_security_group_egress_rule.app_all will be destroyed
+  - resource "aws_vpc_security_group_egress_rule" "app_all" {
+      - arn                    = "arn:aws:ec2:us-east-1:428101261622:security-group-rule/sgr-06f67c046ffdaa214" -> null
+      - cidr_ipv4              = "0.0.0.0/0" -> null
+      - id                     = "sgr-06f67c046ffdaa214" -> null
+      - ip_protocol            = "-1" -> null
+      - security_group_id      = "sg-06bec1064cd88d9fd" -> null
+      - security_group_rule_id = "sgr-06f67c046ffdaa214" -> null
+      - tags_all               = {} -> null
+    }
+
+  # module.network.aws_vpc_security_group_egress_rule.data_all will be destroyed
+  - resource "aws_vpc_security_group_egress_rule" "data_all" {
+      - arn                    = "arn:aws:ec2:us-east-1:428101261622:security-group-rule/sgr-001469cd9776a303b" -> null
+      - cidr_ipv4              = "0.0.0.0/0" -> null
+      - id                     = "sgr-001469cd9776a303b" -> null
+      - ip_protocol            = "-1" -> null
+      - security_group_id      = "sg-0067ff5abbb48e211" -> null
+      - security_group_rule_id = "sgr-001469cd9776a303b" -> null
+      - tags_all               = {} -> null
+    }
+
+  # module.network.aws_vpc_security_group_egress_rule.public_all will be destroyed
+  - resource "aws_vpc_security_group_egress_rule" "public_all" {
+      - arn                    = "arn:aws:ec2:us-east-1:428101261622:security-group-rule/sgr-064677150fba6c433" -> null
+      - cidr_ipv4              = "0.0.0.0/0" -> null
+      - id                     = "sgr-064677150fba6c433" -> null
+      - ip_protocol            = "-1" -> null
+      - security_group_id      = "sg-017ed318483237a06" -> null
+      - security_group_rule_id = "sgr-064677150fba6c433" -> null
+      - tags_all               = {} -> null
+    }
+
+  # module.network.aws_vpc_security_group_ingress_rule.app_http will be destroyed
+  - resource "aws_vpc_security_group_ingress_rule" "app_http" {
+      - arn                          = "arn:aws:ec2:us-east-1:428101261622:security-group-rule/sgr-0b48fd75e05753e61" -> null
+      - description                  = "HTTP from the public tier (ALB)" -> null
+      - from_port                    = 80 -> null
+      - id                           = "sgr-0b48fd75e05753e61" -> null
+      - ip_protocol                  = "tcp" -> null
+      - referenced_security_group_id = "sg-017ed318483237a06" -> null
+      - security_group_id            = "sg-06bec1064cd88d9fd" -> null
+      - security_group_rule_id       = "sgr-0b48fd75e05753e61" -> null
+      - tags_all                     = {} -> null
+      - to_port                      = 80 -> null
+    }
+
+  # module.network.aws_vpc_security_group_ingress_rule.app_https will be destroyed
+  - resource "aws_vpc_security_group_ingress_rule" "app_https" {
+      - arn                          = "arn:aws:ec2:us-east-1:428101261622:security-group-rule/sgr-0c0ac01e45ded3afa" -> null
+      - description                  = "HTTPS from the public tier (ALB)" -> null
+      - from_port                    = 443 -> null
+      - id                           = "sgr-0c0ac01e45ded3afa" -> null
+      - ip_protocol                  = "tcp" -> null
+      - referenced_security_group_id = "sg-017ed318483237a06" -> null
+      - security_group_id            = "sg-06bec1064cd88d9fd" -> null
+      - security_group_rule_id       = "sgr-0c0ac01e45ded3afa" -> null
+      - tags_all                     = {} -> null
+      - to_port                      = 443 -> null
+    }
+
+  # module.network.aws_vpc_security_group_ingress_rule.data_mysql will be destroyed
+  - resource "aws_vpc_security_group_ingress_rule" "data_mysql" {
+      - arn                          = "arn:aws:ec2:us-east-1:428101261622:security-group-rule/sgr-0239b6b6bc6084057" -> null
+      - description                  = "MySQL from the app tier" -> null
+      - from_port                    = 3306 -> null
+      - id                           = "sgr-0239b6b6bc6084057" -> null
+      - ip_protocol                  = "tcp" -> null
+      - referenced_security_group_id = "sg-06bec1064cd88d9fd" -> null
+      - security_group_id            = "sg-0067ff5abbb48e211" -> null
+      - security_group_rule_id       = "sgr-0239b6b6bc6084057" -> null
+      - tags_all                     = {} -> null
+      - to_port                      = 3306 -> null
+    }
+
+  # module.network.aws_vpc_security_group_ingress_rule.data_postgres will be destroyed
+  - resource "aws_vpc_security_group_ingress_rule" "data_postgres" {
+      - arn                          = "arn:aws:ec2:us-east-1:428101261622:security-group-rule/sgr-04329ba01ed8bdb70" -> null
+      - description                  = "PostgreSQL from the app tier" -> null
+      - from_port                    = 5432 -> null
+      - id                           = "sgr-04329ba01ed8bdb70" -> null
+      - ip_protocol                  = "tcp" -> null
+      - referenced_security_group_id = "sg-06bec1064cd88d9fd" -> null
+      - security_group_id            = "sg-0067ff5abbb48e211" -> null
+      - security_group_rule_id       = "sgr-04329ba01ed8bdb70" -> null
+      - tags_all                     = {} -> null
+      - to_port                      = 5432 -> null
+    }
+
+  # module.network.aws_vpc_security_group_ingress_rule.public_http will be destroyed
+  - resource "aws_vpc_security_group_ingress_rule" "public_http" {
+      - arn                    = "arn:aws:ec2:us-east-1:428101261622:security-group-rule/sgr-0fa50841add778fa4" -> null
+      - cidr_ipv4              = "0.0.0.0/0" -> null
+      - description            = "HTTP from the internet" -> null
+      - from_port              = 80 -> null
+      - id                     = "sgr-0fa50841add778fa4" -> null
+      - ip_protocol            = "tcp" -> null
+      - security_group_id      = "sg-017ed318483237a06" -> null
+      - security_group_rule_id = "sgr-0fa50841add778fa4" -> null
+      - tags_all               = {} -> null
+      - to_port                = 80 -> null
+    }
+
+  # module.network.aws_vpc_security_group_ingress_rule.public_https will be destroyed
+  - resource "aws_vpc_security_group_ingress_rule" "public_https" {
+      - arn                    = "arn:aws:ec2:us-east-1:428101261622:security-group-rule/sgr-0634b919359f1ec7b" -> null
+      - cidr_ipv4              = "0.0.0.0/0" -> null
+      - description            = "HTTPS from the internet" -> null
+      - from_port              = 443 -> null
+      - id                     = "sgr-0634b919359f1ec7b" -> null
+      - ip_protocol            = "tcp" -> null
+      - security_group_id      = "sg-017ed318483237a06" -> null
+      - security_group_rule_id = "sgr-0634b919359f1ec7b" -> null
+      - tags_all               = {} -> null
+      - to_port                = 443 -> null
+    }
+
+Plan: 0 to add, 0 to change, 39 to destroy.
+module.network.aws_route_table_association.app[0]: Destroying... [id=rtbassoc-07e7d2372bbe23a10]
+module.network.aws_route_table_association.data[0]: Destroying... [id=rtbassoc-0d37469226585b75a]
+module.network.aws_vpc_security_group_ingress_rule.app_https: Destroying... [id=sgr-0c0ac01e45ded3afa]
+module.network.aws_vpc_security_group_egress_rule.public_all: Destroying... [id=sgr-064677150fba6c433]
+module.network.aws_vpc_security_group_ingress_rule.data_mysql: Destroying... [id=sgr-0239b6b6bc6084057]
+module.data.aws_db_instance.app: Destroying... [id=db-7QPDADQYOJTGML2FDWCJM246HM]
+module.network.aws_vpc_security_group_egress_rule.data_all: Destroying... [id=sgr-001469cd9776a303b]
+module.compute.aws_lb_listener.http: Destroying... [id=arn:aws:elasticloadbalancing:us-east-1:428101261622:listener/app/w1-alb/8440594ae288af4a/c551409e19c4496f]
+module.network.aws_vpc_security_group_egress_rule.app_all: Destroying... [id=sgr-06f67c046ffdaa214]
+module.network.aws_vpc_endpoint.s3: Destroying... [id=vpce-067e644cdf57766e0]
+module.compute.aws_lb_listener.http: Destruction complete after 0s
+module.network.aws_vpc_security_group_ingress_rule.public_http: Destroying... [id=sgr-0fa50841add778fa4]
+module.network.aws_vpc_security_group_ingress_rule.data_mysql: Destruction complete after 0s
+module.network.aws_route_table_association.data[1]: Destroying... [id=rtbassoc-0817192819bda0479]
+module.network.aws_vpc_security_group_ingress_rule.app_https: Destruction complete after 0s
+module.network.aws_vpc_security_group_ingress_rule.public_https: Destroying... [id=sgr-0634b919359f1ec7b]
+module.network.aws_vpc_security_group_egress_rule.public_all: Destruction complete after 0s
+module.network.aws_vpc_security_group_egress_rule.data_all: Destruction complete after 0s
+module.network.aws_route_table_association.app[1]: Destroying... [id=rtbassoc-012248013197011df]
+module.compute.aws_autoscaling_group.app: Destroying... [id=app-asg]
+module.network.aws_vpc_security_group_egress_rule.app_all: Destruction complete after 0s
+module.network.aws_vpc_security_group_ingress_rule.data_postgres: Destroying... [id=sgr-04329ba01ed8bdb70]
+module.network.aws_route_table_association.app[0]: Destruction complete after 0s
+module.network.aws_route_table_association.public[1]: Destroying... [id=rtbassoc-0e096fce835a30a07]
+module.network.aws_route_table_association.data[0]: Destruction complete after 0s
+module.network.aws_route_table_association.public[0]: Destroying... [id=rtbassoc-07b062f1d0025c6fd]
+module.network.aws_vpc_security_group_ingress_rule.public_http: Destruction complete after 0s
+module.network.aws_vpc_security_group_ingress_rule.app_http: Destroying... [id=sgr-0b48fd75e05753e61]
+module.network.aws_vpc_security_group_ingress_rule.public_https: Destruction complete after 1s
+module.compute.aws_lb.w1: Destroying... [id=arn:aws:elasticloadbalancing:us-east-1:428101261622:loadbalancer/app/w1-alb/8440594ae288af4a]
+module.network.aws_vpc_security_group_ingress_rule.data_postgres: Destruction complete after 1s
+module.network.aws_route_table_association.data[1]: Destruction complete after 1s
+module.network.aws_route_table_association.app[1]: Destruction complete after 1s
+module.network.aws_vpc_security_group_ingress_rule.app_http: Destruction complete after 0s
+module.network.aws_route_table_association.public[1]: Destruction complete after 1s
+module.network.aws_route_table_association.public[0]: Destruction complete after 1s
+module.network.aws_route_table.public: Destroying... [id=rtb-0452f855c9e755b45]
+module.network.aws_route_table.public: Destruction complete after 0s
+module.network.aws_vpc_endpoint.s3: Destruction complete after 6s
+module.network.aws_route_table.app: Destroying... [id=rtb-01212f89b5ebb9608]
+module.network.aws_route_table.data: Destroying... [id=rtb-0fe7317d24bc2cee7]
+module.network.aws_route_table.data: Destruction complete after 0s
+module.network.aws_route_table.app: Destruction complete after 0s
+module.network.aws_nat_gateway.w1: Destroying... [id=nat-0d1a40ec583074d26]
+module.data.aws_db_instance.app: Still destroying... [id=db-7QPDADQYOJTGML2FDWCJM246HM, 10s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 10s elapsed]
+module.compute.aws_lb.w1: Still destroying... [id=arn:aws:elasticloadbalancing:us-east-1:...adbalancer/app/w1-alb/8440594ae288af4a, 10s elapsed]
+module.network.aws_nat_gateway.w1: Still destroying... [id=nat-0d1a40ec583074d26, 10s elapsed]
+module.compute.aws_lb.w1: Destruction complete after 16s
+module.network.aws_security_group.public: Destroying... [id=sg-017ed318483237a06]
+module.network.aws_security_group.public: Destruction complete after 1s
+module.data.aws_db_instance.app: Still destroying... [id=db-7QPDADQYOJTGML2FDWCJM246HM, 20s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 20s elapsed]
+module.network.aws_nat_gateway.w1: Still destroying... [id=nat-0d1a40ec583074d26, 23s elapsed]
+module.data.aws_db_instance.app: Still destroying... [id=db-7QPDADQYOJTGML2FDWCJM246HM, 32s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 33s elapsed]
+module.network.aws_nat_gateway.w1: Still destroying... [id=nat-0d1a40ec583074d26, 33s elapsed]
+module.data.aws_db_instance.app: Still destroying... [id=db-7QPDADQYOJTGML2FDWCJM246HM, 42s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 43s elapsed]
+module.network.aws_nat_gateway.w1: Still destroying... [id=nat-0d1a40ec583074d26, 43s elapsed]
+module.network.aws_nat_gateway.w1: Destruction complete after 43s
+module.network.aws_internet_gateway.w1: Destroying... [id=igw-0fda2b360b44aa93c]
+module.network.aws_subnet.public[1]: Destroying... [id=subnet-02d5e27c0a686ccc3]
+module.network.aws_eip.nat: Destroying... [id=eipalloc-0b440b8a4e01697c8]
+module.network.aws_subnet.public[0]: Destroying... [id=subnet-07f25b7d23a88013d]
+module.network.aws_subnet.public[0]: Destruction complete after 1s
+module.network.aws_eip.nat: Destruction complete after 1s
+module.network.aws_subnet.public[1]: Destruction complete after 1s
+module.network.aws_internet_gateway.w1: Destruction complete after 1s
+module.data.aws_db_instance.app: Still destroying... [id=db-7QPDADQYOJTGML2FDWCJM246HM, 52s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 53s elapsed]
+module.data.aws_db_instance.app: Still destroying... [id=db-7QPDADQYOJTGML2FDWCJM246HM, 1m5s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 1m5s elapsed]
+module.data.aws_db_instance.app: Still destroying... [id=db-7QPDADQYOJTGML2FDWCJM246HM, 1m15s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 1m15s elapsed]
+module.data.aws_db_instance.app: Still destroying... [id=db-7QPDADQYOJTGML2FDWCJM246HM, 1m25s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 1m25s elapsed]
+module.data.aws_db_instance.app: Still destroying... [id=db-7QPDADQYOJTGML2FDWCJM246HM, 1m37s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 1m38s elapsed]
+module.data.aws_db_instance.app: Still destroying... [id=db-7QPDADQYOJTGML2FDWCJM246HM, 1m47s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 1m48s elapsed]
+module.data.aws_db_instance.app: Still destroying... [id=db-7QPDADQYOJTGML2FDWCJM246HM, 1m57s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 1m58s elapsed]
+module.data.aws_db_instance.app: Destruction complete after 1m59s
+module.data.aws_db_subnet_group.w1: Destroying... [id=w1-data-subnet-group]
+module.network.aws_security_group.data: Destroying... [id=sg-0067ff5abbb48e211]
+module.data.aws_db_subnet_group.w1: Destruction complete after 0s
+module.network.aws_subnet.data[1]: Destroying... [id=subnet-0e1fddbbd5a6c3a74]
+module.network.aws_subnet.data[0]: Destroying... [id=subnet-0d3075557e52b8134]
+module.network.aws_security_group.data: Destruction complete after 0s
+module.network.aws_subnet.data[1]: Destruction complete after 1s
+module.network.aws_subnet.data[0]: Destruction complete after 1s
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 2m8s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 2m20s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 2m30s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 2m40s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 2m53s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 3m3s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 3m13s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 3m25s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 3m35s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 3m45s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 3m58s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 4m8s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 4m18s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 4m30s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 4m40s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 4m50s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 5m0s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 5m13s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 5m23s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 5m33s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 5m45s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 5m55s elapsed]
+module.compute.aws_autoscaling_group.app: Still destroying... [id=app-asg, 6m5s elapsed]
+module.compute.aws_autoscaling_group.app: Destruction complete after 6m9s
+module.network.aws_subnet.app[0]: Destroying... [id=subnet-0b88319d5fd0f048a]
+module.compute.aws_lb_target_group.app: Destroying... [id=arn:aws:elasticloadbalancing:us-east-1:428101261622:targetgroup/w1-app-tg/1b7fc8c8a40ebaa1]
+module.compute.aws_launch_template.app: Destroying... [id=lt-070eca396ad865cbc]
+module.network.aws_subnet.app[1]: Destroying... [id=subnet-094b112efcb91a6d4]
+module.compute.aws_lb_target_group.app: Destruction complete after 1s
+module.compute.aws_launch_template.app: Destruction complete after 1s
+module.network.aws_security_group.app: Destroying... [id=sg-06bec1064cd88d9fd]
+module.network.aws_subnet.app[1]: Destruction complete after 1s
+module.network.aws_subnet.app[0]: Destruction complete after 1s
+module.network.aws_security_group.app: Destruction complete after 0s
+module.network.aws_vpc.w1: Destroying... [id=vpc-0f7c3765b59767bd9]
+module.network.aws_vpc.w1: Destruction complete after 1s
+
+Destroy complete! Resources: 39 destroyed.

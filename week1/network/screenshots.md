@@ -14,3 +14,7 @@ Standing pattern for every day (applies Days 1-30): (1) the resource exists, lis
 8. `08-sg-data-inbound.png` — w1-data-sg → Inbound rules: 5432 and 3306 sourced from w1-app-sg only.
 9. `09-s3-endpoint.png` — VPC → Endpoints: the S3 gateway endpoint, its type, and the route tables it is attached to.
 10. `10-flow-logs-active.png` — Your VPCs → lab-vpc → Flow logs tab: fl-0d62187ae88cfecef with status Active.
+
+## Recapture note, 2026-11-26
+
+Items 2, 3, 4, 5, 6, 7, and 9 were replaced on 2026-11-26 with landscape captures (1069 x 769, account ID masked) of the Terraform-built w1-vpc, which follows the same design as the original hand-built lab-vpc. Portrait originals are backed up at week1-portrait-backup-2026-11-26. Items 1 and 8 were recaptured in landscape on 2026-11-21. Item 10 was NOT replaced: the Terraform VPC has no flow log, so the original Day 2 portrait (flow log Active on lab-vpc) stays, and the missing flow log is recorded as a Terraform parity gap.

@@ -13,3 +13,7 @@ Standing pattern for every day (applies Days 1-30): (1) the resource exists, lis
 7. `07-alb-page.png` — Browser at the ALB DNS name (w1-alb-1654882201.us-east-1.elb.amazonaws.com): the "hello from" page with the instance hostname. Refresh a few times to catch both hostnames if you can.
 8. `08-s3-properties.png` — S3 → derek-lab-app-data → Properties: versioning Enabled, default encryption on, and Block Public Access all on (the Permissions tab shows the block settings too).
 9. `09-session-manager.png` — Systems Manager → Session Manager: the instance listed as connectable, or a started session. Proves administration works with no SSH port open.
+
+## Recapture note, 2026-11-26
+
+Items 1, 2, 3, 4, 8, and 9 were replaced on 2026-11-26 with landscape captures (1069 x 769, account ID masked) from the one-session Terraform rebuild. Portrait originals are backed up at week1-portrait-backup-2026-11-26. Item 5 was recaptured in landscape on 2026-11-21. Item 6 was NOT replaced: the Terraform launch template carries no IAM instance profile, so the rebuilt instances run without ec2-app-role; the original Day 3 portrait stays, and the missing profile is recorded as a Terraform parity gap. Item 7 (the ALB hello page) has still never been captured.

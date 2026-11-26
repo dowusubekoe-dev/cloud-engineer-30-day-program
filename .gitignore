@@ -90,6 +90,7 @@ desktop.ini
 .idea/
 .vscode/
 *.code-workspace
+*.misc
 
 # --- Explicitly kept (do not ignore) ------------------------------------------
 # week1/*/screenshots/*.png  - console evidence, committed on purpose
