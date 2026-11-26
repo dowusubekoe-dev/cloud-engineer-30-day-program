@@ -96,3 +96,4 @@ desktop.ini
 # week1/*/screenshots/*.png  - console evidence, committed on purpose
 # **/*.tfvars.example        - variable templates with placeholder values
 # .terraform.lock.hcl        - provider version lock, commit it
+week1-portrait-backup-2026-11-26/
