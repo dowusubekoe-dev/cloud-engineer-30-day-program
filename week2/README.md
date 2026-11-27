@@ -163,19 +163,24 @@ rules).
 **Drill:** "Walk me through VNet design for a three-tier app on Azure,"
 from my bootcamp three-tier project.
 
-**Status (2026-11-27):** In progress. Steps 0 and 1 done: the
-subscription is set, rg-smartlead and the tfstate storage are created
-in eastus2. My first `terraform init` failed with SubscriptionNotFound
-(the ARM_* variables in the preflight record above); after unsetting
-them, init succeeded on the azurerm backend. The GitHub repo
-`smartlead-on-azure` is created (public) and the first commit is
-pushed (e371d5b: backend.tf, lock file, notes, screenshots list,
-drill script, .gitignore). The first push attempt was rejected
-because `git add .` swept in `terraform/.terraform/` (the 222 MB
-provider binary is over GitHub's 100 MB file limit); fixed with a
-.gitignore and an amended commit. Still to close the day: the
-`terraform plan` result, the screenshots, the filled-in notes, and
-the drill recording.
+**Status (2026-11-27):** Complete, except my drill recording.
+Steps 0 and 1
+done: the subscription is set, rg-smartlead and the tfstate storage
+are created in eastus2. My first `terraform init` failed with
+SubscriptionNotFound (the ARM_* variables in the preflight record
+above); after unsetting them, init succeeded on the azurerm backend
+and the state blob sits in the tfstate container. `terraform plan`
+verified empty twice, my run and a fresh-shell re-run; the re-run
+output is saved in the repo as terraform/plan-day8.log, and notes.md
+is filled in. The GitHub repo `smartlead-on-azure` is created
+(public) and pushed (e371d5b: backend.tf, lock file, notes,
+screenshots list, drill script, .gitignore; 6fc0a3c: repo README).
+The first push attempt was rejected because `git add .` swept in
+`terraform/.terraform/` (the 222 MB provider binary is over GitHub's
+100 MB file limit); fixed with a .gitignore and an amended commit.
+Portal evidence is saved in the repo's screenshots/ folder (five
+PNGs, subscription and tenant IDs blurred in the committed copies);
+screenshots.md records what each one shows.
 
 ---
 
