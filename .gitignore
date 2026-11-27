@@ -97,3 +97,8 @@ desktop.ini
 # **/*.tfvars.example        - variable templates with placeholder values
 # .terraform.lock.hcl        - provider version lock, commit it
 week1-portrait-backup-2026-11-26/
+
+# --- Week 2 deployment repo (nested; has its own GitHub repo) -------------
+# Lives at github.com/dowusubekoe-dev/smartlead-on-azure. The Week 2
+# README in this repo tells the story and links to it.
+week2/smartlead-on-azure/
