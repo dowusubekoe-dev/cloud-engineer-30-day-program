@@ -188,6 +188,14 @@ screenshots.md records what each one shows.
 
 **Goal:** the network in Terraform before any app lands on it.
 
+**Target architecture:** the design and diagram are filed in the
+smartlead-on-azure repo (`docs/architecture.mmd`; the design
+document is `docs/architecture.md`). Reconcile before building:
+the architecture puts the VNet at 10.0.0.0/16 with four /24
+subnets (ingress, app, data, endpoints), while the sketch below
+uses 10.30.0.0/16 with a /23 infra subnet and a /24 endpoints
+subnet. Settle the CIDR and the Container Apps subnet size first.
+
 `network.tf` (core resources; extend with NSG rules per tier):
 
 ```hcl
